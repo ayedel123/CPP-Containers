@@ -21,7 +21,7 @@ The russian version of the task can be found in the repository.
 
 ![s21_containers](misc/images/s21_containers.png)
 
-Planet Earth, USA, California, somewhere among the massive containers of the Port of Oakland, 29 October 1993.
+Planet Earth, somewhere among the massive containers of the Port, 29 October 1993.
 
 *- Do you really think Bjarne will agree to add this to the standard?*
 
@@ -133,8 +133,8 @@ You need to complete the classes with the appropriate methods, according to the 
 
 Note: the arguments are the already created elements of the appropriate container that should be inserted into this container.
 
-*Tip 1*: notice that each of these methods uses an Args&&... args - Parameter pack construct. This construct allows a variable number of parameters to be passed to a function or method. So, when calling a method defined as `iterator insert_many(const_iterator pos, Args&&... args)`, you can write either `insert_many(pos, arg1, arg2)` or `insert_many(pos, arg1, arg2, arg3)`.
+*Tip 1*: Notice that each of these methods uses an Args&&... args - Parameter pack construct. This construct allows a variable number of parameters to be passed to a function or method. So, when calling a method defined as `iterator insert_many(const_iterator pos, Args&&... args)`, you can write either `insert_many(pos, arg1, arg2)` or `insert_many(pos, arg1, arg2, arg3)`.
 
-*Tip 2*: remember to test methods for different cases, including boundary ones.
+*Tip 2*: Remember to test methods for different cases, including boundary ones.
 
 💡 [Tap here](https://forms.yandex.ru/cloud/64181a7dc09c02252de7a4f3/) **to leave your feedback on the project**. Product Team really tries to make your educational experience better.
