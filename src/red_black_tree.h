@@ -3,8 +3,9 @@
 
 enum NodeColors
 {
-    red_node,
-    black_node
+
+    black_node,
+    red_node
 };
 
 class TreeNode
@@ -12,20 +13,17 @@ class TreeNode
 
 public:
     int value = 0;
-    TreeNode *left_node = nullptr;
-    TreeNode *right_node = nullptr;
+    TreeNode *left = nullptr;
+    TreeNode *right = nullptr;
     TreeNode *parent = nullptr;
-    int color = black_node;
+    bool color = black_node;
 
     TreeNode(int value)
     {
         this->value = value;
         this->color = red_node;
+        parent = nullptr;
     }
-    // TreeNode(int value, TreeNode *parent) : TreeNode(value)
-    // {
-    //     this->parent = parent;
-    // }
 };
 
 class RedBlackTree
@@ -40,7 +38,8 @@ public:
 
     void DeleteElement(int value);
 
-    void TurnRight(TreeNode *node);
+    void RotateLeft(TreeNode *node);
+    void RotateRight(TreeNode *node);
 
     void TurnLeft(TreeNode *node);
     void SwapColors();
@@ -65,14 +64,25 @@ public:
                 q.pop();
                 if (node)
                 {
-                    std::cout << node->value << " ";
-                    if (node->left_node)
+                    if (node->color == 1)
                     {
-                        q.push(node->left_node);
+                        // Устанавливаем красный цвет для текста
+                        std::cout << "\033[1;31m"; // ASCII-код для установки цвета текста в красный
                     }
-                    if (node->right_node)
+                    else
                     {
-                        q.push(node->right_node);
+                        // Устанавливаем черный цвет для текста
+                        std::cout << "\033[1;30m"; // ASCII-код для установки цвета текста в черный
+                    }
+                    std::cout << node->value; // Вывод значения узла
+                    std::cout << "\033[0m ";  // Сброс цвета обратно в стандартный
+                    if (node->left)
+                    {
+                        q.push(node->left);
+                    }
+                    if (node->right)
+                    {
+                        q.push(node->right);
                     }
                 }
                 nodeCount--;
@@ -80,4 +90,27 @@ public:
             std::cout << std::endl;
         }
     }
+
+    TreeNode *GetGrandpa(TreeNode *node);
+    TreeNode *GetUncle(TreeNode *node);
+
+    void InsCase1(TreeNode *node);
+    void InsCase2(TreeNode *node);
+    void InsCase3(TreeNode *node);
+    void InsCase4(TreeNode *node);
+    void InsCase5(TreeNode *node);
+
+    void Remove(int value);
+    void DelCase1(TreeNode *node);
+    void DelCase2(TreeNode *node);
+    void DelCase3(TreeNode *node);
+    void DelCase4(TreeNode *node);
+    void DelCase5(TreeNode *node);
+    void DelCase6(TreeNode *node);
+
+    // probably just friend functions
+    TreeNode *HandleTwoChildren(TreeNode *tmp);
+    void HandleChildFree(TreeNode *tmp);
+    void HanldeIfChild(TreeNode *tmp, TreeNode *child);
+    TreeNode *Sibling(TreeNode *node);
 };

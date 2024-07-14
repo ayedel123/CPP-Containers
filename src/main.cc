@@ -15,7 +15,10 @@ int main()
     rb_tree->InsertNode(17);
     rb_tree->InsertNode(3);
     rb_tree->InsertNode(1);
-
+    rb_tree->InsertNode(7);
+    rb_tree->InsertNode(2);
+    rb_tree->InsertNode(6);
+    rb_tree->Remove(4);
     rb_tree->PrintTree(rb_tree->root);
 
     return 0;

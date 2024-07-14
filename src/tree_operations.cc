@@ -2,32 +2,19 @@
 
 void RedBlackTree::InsertRecursive(TreeNode *parent, TreeNode *child)
 {
-    if (child->value < parent->value)
+    TreeNode **tmp = (child->value < parent->value) ? &parent->left : &parent->right;
+
+    if (*tmp == nullptr)
     {
-        if (parent->left_node == nullptr)
-        {
-            parent->left_node = child;
-        }
-        else
-        {
-            InsertRecursive(parent->left_node, child);
-        }
+        *tmp = child;
+        child->parent = parent;
+        InsCase1(child);
     }
-    else if (child->value > parent->value)
+    else if ((*tmp)->value != child->value)
     {
-        if (parent->right_node == nullptr)
-        {
-            parent->right_node = child;
-        }
-        else
-        {
-            InsertRecursive(parent->right_node, child);
-        }
+        InsertRecursive(*tmp, child);
     }
-    else
-    {
-        std::cout << "same elements";
-    }
+    return;
 }
 
 void RedBlackTree::InsertNode(int value)
@@ -43,6 +30,8 @@ void RedBlackTree::InsertNode(int value)
     {
         InsertRecursive(root, newNode);
     }
+
+    return;
 }
 
 TreeNode *RedBlackTree::RecursiveSearch(TreeNode *parent, int value)
@@ -52,14 +41,11 @@ TreeNode *RedBlackTree::RecursiveSearch(TreeNode *parent, int value)
     {
         result = parent;
     }
-    else if (parent->value < value)
+    else
     {
-        result = RecursiveSearch(parent->left_node, value);
+        result = (parent->value > value) ? RecursiveSearch(parent->left, value) : RecursiveSearch(parent->right, value);
     }
-    else if (parent->value > value)
-    {
-        result = RecursiveSearch(parent->right_node, value);
-    }
+
     return result;
 }
 
@@ -68,58 +54,116 @@ void RedBlackTree::DeleteElement(int value)
     TreeNode *node = RecursiveSearch(this->root, value);
     if (node != nullptr)
     {
-        if (node->parent->left_node == node)
+        if (node->parent->left == node)
         {
-            node->parent->left_node = nullptr;
+            node->parent->left = nullptr;
         }
-        else if (node->parent->right_node == node)
+        else if (node->parent->right == node)
         {
-            node->parent->right_node = nullptr;
+            node->parent->right = nullptr;
         }
         node->parent = nullptr;
     }
 }
 
-void RedBlackTree::TurnLeft(TreeNode *node)
+void RedBlackTree::RotateLeft(TreeNode *node)
 {
-    TreeNode *pivot = node->right_node;
+    TreeNode *right = node->right;
 
-    pivot->parent = node->parent;
-    if (node->parent != nullptr)
+    right->parent = node->parent;
+    if (node->parent)
     {
-        if (node->parent->left_node == node)
-            node->parent->left_node = pivot;
+        TreeNode *p = node->parent;
+
+        if (p->left == node)
+        {
+            p->left = right;
+        }
         else
-            node->parent->left_node = pivot;
+        {
+            p->right = right;
+        }
+    }
+    else
+    {
+        root = right;
     }
 
-    node->left_node = pivot->left_node;
-    if (pivot->left_node != nullptr)
-        pivot->left_node->parent = node;
+    node->right = right->left;
+    if (right->left)
+    {
+        right->left->parent = node;
+    }
 
-    node->parent = pivot;
-    pivot->left_node = node;
+    node->parent = right;
+    right->left = node;
 }
 
-void RedBlackTree::TurnRight(TreeNode *node)
+void RedBlackTree::RotateRight(TreeNode *node)
 {
-    TreeNode *pivot = node->left_node;
+    TreeNode *left = node->left;
 
-    pivot->parent = node->parent;
-    if (node->parent != nullptr)
+    left->parent = node->parent;
+    if (node->parent)
     {
-        if (node->parent->left_node == node)
-            node->parent->left_node = pivot;
+        TreeNode *p = node->parent;
+
+        if (p->left == node)
+        {
+            p->left = left;
+        }
         else
-            node->parent->right_node = pivot;
+        {
+            p->right = left;
+        }
+    }
+    else
+    {
+        root = left;
     }
 
-    node->left_node = pivot->right_node;
-    if (pivot->right_node != nullptr)
-        pivot->right_node->parent = node;
+    node->left = left->right;
+    if (left->right)
+    {
+        left->right->parent = node;
+    }
 
-    node->parent = pivot;
-    pivot->right_node = node;
+    node->parent = left;
+    left->right = node;
+}
+
+TreeNode *RedBlackTree::GetGrandpa(TreeNode *node)
+{
+    TreeNode *p = node->parent;
+    if (p != nullptr && p->parent != nullptr)
+    {
+        return p->parent;
+    }
+    else
+    {
+        return nullptr;
+    }
+}
+
+TreeNode *RedBlackTree::GetUncle(TreeNode *node)
+{
+    TreeNode *tmp = GetGrandpa(node);
+
+    if (tmp != nullptr)
+    {
+        if (tmp->left == node->parent)
+        {
+            return tmp->right;
+        }
+        else
+        {
+            return tmp->left;
+        }
+    }
+    else
+    {
+        return nullptr;
+    }
 }
 
 void RedBlackTree::SwapColors()
