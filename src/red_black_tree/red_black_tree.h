@@ -65,7 +65,7 @@ namespace s21
                    sizeof(TreeNode<Key, T>);
         }
 
-        //void Sort(TreeNode<Key, T> *tmp);
+        // void Sort(TreeNode<Key, T> *tmp);
 
         void InsertRecursive(TreeNode<Key, T> *parent, TreeNode<Key, T> *child);
         void InsertNode(Key key, T value);
@@ -94,6 +94,8 @@ namespace s21
         TreeNode<Key, T> *GetMax(TreeNode<Key, T> *tmp);
         TreeNode<Key, T> *Next(TreeNode<Key, T> *tmp);
         TreeNode<Key, T> *Previous(TreeNode<Key, T> *tmp);
+        void LRNdelete(TreeNode<Key, T> *tmp);
+        ~RedBlackTree();
 
         void
         PrintTree(TreeNode<Key, T> *root)

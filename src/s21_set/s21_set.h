@@ -5,13 +5,13 @@
 
 namespace s21
 {
-    template <typename Key>
+    template <typename key_type, typename value_type>
     class s21_set
     {
         using size_type = RedBlackTree<T>::size_type;
 
     private:
-        RedBlackTree<T> rbtree_;
+        RedBlackTree<key_type, value_type> rbtree_;
         size_type size = 0;
 
     public:
@@ -19,7 +19,19 @@ namespace s21
         bool empty() { return (size) ? true : false; }
         void insert();
         size_type max_siize();
+        value_type &reference;
+        const value_type &const_reference;
+
+        s21_set();
+        s21_set(std::initializer_list<value_type> const &items);
+        s21_set(const s21_set &s);
+        s21_set(s21_set &&s);
+        ~s21_set();
+
+        operator=(s21_set && s);
     };
 }
+
+#include "opertots.h"
 
 #endif
