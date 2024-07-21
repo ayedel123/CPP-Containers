@@ -1,7 +1,10 @@
-G++ = gcc -lstdc++
+GPP = g++
+CFLAGS = -std=c++17
+
+RBTree =
 
 test: clean
-	$(G++) main.cc tree_operations.cc insert_cases.cc remove.cc -o test
+	$(GPP) $(CFLAGS) main.cc $(RBTree) -o test
 run:
 	./test
 
