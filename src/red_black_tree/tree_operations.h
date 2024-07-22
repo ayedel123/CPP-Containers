@@ -4,11 +4,11 @@
 namespace s21
 {
 
-    template <typename Key, typename T>
-    TreeNode<Key, T> *RedBlackTree<Key, T>::RecursiveSearch(TreeNode<Key, T> *parent, Key key)
+    template <typename Key>
+    TreeNode<Key> *RedBlackTree<Key>::RecursiveSearch(TreeNode<Key> *parent, Key key)
     {
-        TreeNode<Key, T> *result = nullptr;
-        if (parent == nullptr || parent->value == key)
+        TreeNode<Key> *result = nullptr;
+        if (parent == nullptr || parent->key == key)
         {
             result = parent;
         }
@@ -20,15 +20,15 @@ namespace s21
         return result;
     }
 
-    template <typename Key, typename T>
-    void RedBlackTree<Key, T>::RotateLeft(TreeNode<Key, T> *node)
+    template <typename Key>
+    void RedBlackTree<Key>::RotateLeft(TreeNode<Key> *node)
     {
-        TreeNode<Key, T> *right = node->right;
+        TreeNode<Key> *right = node->right;
 
         right->parent = node->parent;
         if (node->parent)
         {
-            TreeNode<Key, T> *p = node->parent;
+            TreeNode<Key> *p = node->parent;
 
             if (p->left == node)
             {
@@ -53,15 +53,15 @@ namespace s21
         node->parent = right;
         right->left = node;
     }
-    template <typename Key, typename T>
-    void RedBlackTree<Key, T>::RotateRight(TreeNode<Key, T> *node)
+    template <typename Key>
+    void RedBlackTree<Key>::RotateRight(TreeNode<Key> *node)
     {
-        TreeNode<Key, T> *left = node->left;
+        TreeNode<Key> *left = node->left;
 
         left->parent = node->parent;
         if (node->parent)
         {
-            TreeNode<Key, T> *p = node->parent;
+            TreeNode<Key> *p = node->parent;
 
             if (p->left == node)
             {
@@ -86,10 +86,10 @@ namespace s21
         node->parent = left;
         left->right = node;
     }
-    template <typename Key, typename T>
-    TreeNode<Key, T> *RedBlackTree<Key, T>::GetGrandpa(TreeNode<Key, T> *node)
+    template <typename Key>
+    TreeNode<Key> *RedBlackTree<Key>::GetGrandpa(TreeNode<Key> *node)
     {
-        TreeNode<Key, T> *p = node->parent;
+        TreeNode<Key> *p = node->parent;
         if (p != nullptr && p->parent != nullptr)
         {
             return p->parent;
@@ -99,10 +99,10 @@ namespace s21
             return nullptr;
         }
     }
-    template <typename Key, typename T>
-    TreeNode<Key, T> *RedBlackTree<Key, T>::GetUncle(TreeNode<Key, T> *node)
+    template <typename Key>
+    TreeNode<Key> *RedBlackTree<Key>::GetUncle(TreeNode<Key> *node)
     {
-        TreeNode<Key, T> *tmp = GetGrandpa(node);
+        TreeNode<Key> *tmp = GetGrandpa(node);
 
         if (tmp != nullptr)
         {

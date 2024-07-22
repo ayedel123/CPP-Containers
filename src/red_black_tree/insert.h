@@ -4,10 +4,10 @@
 namespace s21
 {
 
-    template <typename Key, typename T>
-    void RedBlackTree<Key, T>::InsertRecursive(TreeNode<Key, T> *parent, TreeNode<Key, T> *child)
+    template <typename Key>
+    void RedBlackTree<Key>::InsertRecursive(TreeNode<Key> *parent, TreeNode<Key> *child)
     {
-        TreeNode<Key, T> **tmp = (child->key < parent->key) ? &parent->left : &parent->right;
+        TreeNode<Key> **tmp = (child->key < parent->key) ? &parent->left : &parent->right;
 
         if (*tmp == nullptr)
         {
@@ -22,10 +22,10 @@ namespace s21
         }
     }
 
-    template <typename Key, typename T>
-    void RedBlackTree<Key, T>::InsertNode(Key key, T value)
+    template <typename Key>
+    void RedBlackTree<Key>::InsertNode(Key key)
     {
-        TreeNode<Key, T> *newNode = new TreeNode<Key, T>{key, value, nullptr, nullptr, nullptr, red_node};
+        TreeNode<Key> *newNode = new TreeNode<Key>{key, nullptr, nullptr, nullptr, red_node};
         // newNode->key = key;
         // newNode->key = key;
 
@@ -41,8 +41,8 @@ namespace s21
         }
     }
 
-    template <typename Key, typename T>
-    void RedBlackTree<Key, T>::InsCase1(TreeNode<Key, T> *node)
+    template <typename Key>
+    void RedBlackTree<Key>::InsCase1(TreeNode<Key> *node)
     {
         if (node->parent == nullptr)
         {
@@ -54,8 +54,8 @@ namespace s21
         }
     }
 
-    template <typename Key, typename T>
-    void RedBlackTree<Key, T>::InsCase2(TreeNode<Key, T> *node)
+    template <typename Key>
+    void RedBlackTree<Key>::InsCase2(TreeNode<Key> *node)
     {
         if (node->parent->color == black_node)
         {
@@ -67,15 +67,15 @@ namespace s21
         }
     }
 
-    template <typename Key, typename T>
-    void RedBlackTree<Key, T>::InsCase3(TreeNode<Key, T> *node)
+    template <typename Key>
+    void RedBlackTree<Key>::InsCase3(TreeNode<Key> *node)
     {
-        TreeNode<Key, T> *u = GetUncle(node);
+        TreeNode<Key> *u = GetUncle(node);
         if (u != nullptr && u->color == red_node)
         {
             node->parent->color = black_node;
             u->color = black_node;
-            TreeNode<Key, T> *g = GetGrandpa(node);
+            TreeNode<Key> *g = GetGrandpa(node);
             g->color = red_node;
             InsCase1(g);
         }
@@ -85,12 +85,12 @@ namespace s21
         }
     }
 
-    template <typename Key, typename T>
-    void RedBlackTree<Key, T>::InsCase4(TreeNode<Key, T> *node)
+    template <typename Key>
+    void RedBlackTree<Key>::InsCase4(TreeNode<Key> *node)
     {
-        TreeNode<Key, T> *g = GetGrandpa(node);
-        TreeNode<Key, T> *tmp = node;
-        TreeNode<Key, T> *p = node->parent;
+        TreeNode<Key> *g = GetGrandpa(node);
+        TreeNode<Key> *tmp = node;
+        TreeNode<Key> *p = node->parent;
 
         if (node == p->right && p == g->left)
         {
@@ -106,11 +106,11 @@ namespace s21
         InsCase5(tmp);
     }
 
-    template <typename Key, typename T>
-    void RedBlackTree<Key, T>::InsCase5(TreeNode<Key, T> *node)
+    template <typename Key>
+    void RedBlackTree<Key>::InsCase5(TreeNode<Key> *node)
     {
-        TreeNode<Key, T> *g = GetGrandpa(node);
-        TreeNode<Key, T> *p = node->parent;
+        TreeNode<Key> *g = GetGrandpa(node);
+        TreeNode<Key> *p = node->parent;
         p->color = black_node;
         g->color = red_node;
 

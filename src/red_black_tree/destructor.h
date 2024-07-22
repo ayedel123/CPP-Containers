@@ -4,14 +4,14 @@
 namespace s21
 {
 
-    template <typename Key, typename T>
-    RedBlackTree<Key, T>::~RedBlackTree()
+    template <typename Key>
+    RedBlackTree<Key>::~RedBlackTree()
     {
         LRNdelete(root);
     }
-    
-    template <typename Key, typename T>
-    void RedBlackTree<Key, T>::LRNdelete(TreeNode<Key, T> *tmp)
+
+    template <typename Key>
+    void RedBlackTree<Key>::LRNdelete(TreeNode<Key> *tmp)
     {
         if (tmp != nullptr)
         {

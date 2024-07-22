@@ -4,8 +4,8 @@
 namespace s21
 {
 
-    template <typename Key, typename T>
-    TreeNode<Key, T> *RedBlackTree<Key, T>::GetMin(TreeNode<Key, T> *tmp)
+    template <typename Key>
+    TreeNode<Key> *RedBlackTree<Key>::GetMin(TreeNode<Key> *tmp)
     {
         if (tmp == nullptr)
             tmp = root;
@@ -16,22 +16,22 @@ namespace s21
         return tmp;
     }
 
-    template <typename Key, typename T>
-    TreeNode<Key, T> *RedBlackTree<Key, T>::GetMax(TreeNode<Key, T> *tmp)
+    template <typename Key>
+    TreeNode<Key> *RedBlackTree<Key>::GetMax(TreeNode<Key> *tmp)
     {
         if (tmp == nullptr)
             tmp = root;
-        while (tmp->left != nullptr)
+        while (tmp->right != nullptr)
         {
-            tmp = tmp->left;
+            tmp = tmp->right;
         }
         return tmp;
     }
 
-    template <typename Key, typename T>
-    TreeNode<Key, T> *RedBlackTree<Key, T>::Next(TreeNode<Key, T> *tmp)
+    template <typename Key>
+    TreeNode<Key> *RedBlackTree<Key>::Next(TreeNode<Key> *tmp)
     {
-        TreeNode<Key, T> *result = nullptr;
+        TreeNode<Key> *result = nullptr;
 
         if (tmp->right)
         {
@@ -50,10 +50,10 @@ namespace s21
         return result;
     }
 
-    template <typename Key, typename T>
-    TreeNode<Key, T> *RedBlackTree<Key, T>::Previous(TreeNode<Key, T> *tmp)
+    template <typename Key>
+    TreeNode<Key> *RedBlackTree<Key>::Previous(TreeNode<Key> *tmp)
     {
-        TreeNode<Key, T> *result = nullptr;
+        TreeNode<Key> *result = nullptr;
 
         if (tmp->left)
         {
@@ -71,8 +71,6 @@ namespace s21
 
         return result;
     }
-
-   
 
 }
 
