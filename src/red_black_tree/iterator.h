@@ -12,6 +12,12 @@ namespace s21
         TreeNode<Key> *node_;
 
     public:
+        iterator(RedBlackTree<Key> *parent)
+        {
+            node_ = nullptr;
+            parent_ = parent;
+        }
+
         iterator(TreeNode<Key> *node, RedBlackTree<Key> *parent)
         {
             node_ = node;

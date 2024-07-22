@@ -5,40 +5,48 @@ namespace s21
 {
 
     template <typename Key>
-    void RedBlackTree<Key>::InsertRecursive(TreeNode<Key> *parent, TreeNode<Key> *child)
+    std::pair<typename RedBlackTree<Key>::iterator, bool> RedBlackTree<Key>::InsertRecursive(TreeNode<Key> *parent, TreeNode<Key> *child)
     {
         TreeNode<Key> **tmp = (child->key < parent->key) ? &parent->left : &parent->right;
-
-        if (*tmp == nullptr)
+        std::pair<iterator, bool> result{RedBlackTree<Key>::iterator(this), false};
+        if (parent->key == child->key)
+        {
+            result = std::pair<iterator, bool>{RedBlackTree<Key>::iterator(this), false};
+        }
+        else if (*tmp == nullptr)
         {
             *tmp = child;
             child->parent = parent;
             InsCase1(child);
             size_++;
+            result = std::pair<iterator, bool>{RedBlackTree<Key>::iterator(child, this), true};
         }
         else if ((*tmp)->key != child->key)
         {
-            InsertRecursive(*tmp, child);
+            result = InsertRecursive(*tmp, child);
         }
+        return result;
     }
 
     template <typename Key>
-    void RedBlackTree<Key>::InsertNode(Key key)
+    std::pair<typename RedBlackTree<Key>::iterator, bool> RedBlackTree<Key>::InsertNode(Key key)
     {
+
         TreeNode<Key> *newNode = new TreeNode<Key>{key, nullptr, nullptr, nullptr, red_node};
-        // newNode->key = key;
-        // newNode->key = key;
+        std::pair<iterator, bool> result{RedBlackTree<Key>::iterator(this), false};
 
         if (root == nullptr)
         {
             root = newNode;
             root->color = black_node;
             size_++;
+            result = std::pair<iterator, bool>{RedBlackTree<Key>::iterator(root, this), true};
         }
         else
         {
-            InsertRecursive(root, newNode);
+            result = InsertRecursive(root, newNode);
         }
+        return result;
     }
 
     template <typename Key>

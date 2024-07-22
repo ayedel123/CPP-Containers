@@ -2,14 +2,14 @@
 #include "my_pair.h"
 #include "./red_black_tree/red_black_tree.h"
 #include <map>
+#include "./s21_set/s21_set.h"
 
 using namespace s21;
 
 int main()
 {
-    std::cout << "/\\EC\n";
+    // std::cout << "/\\EC\n";
     RedBlackTree<int> *rb_tree = new RedBlackTree<int>();
-    // CoolPair <int,int> * coolPair = new CoolPair<int,int>();
 
     rb_tree->InsertNode(5);
     rb_tree->InsertNode(4);
@@ -52,7 +52,7 @@ int main()
     // std::map<int, int>::iterator iter = myMap.begin();
     // std::cout<<iter->first;
 
-    RedBlackTree<int>::iterator iter = rb_tree->begin();
+    /*RedBlackTree<int>::iterator iter = rb_tree->begin();
     std::cout << (*iter) << std::endl;
     std::cout << (*(++iter)) << std::endl;
     std::cout << (*(++iter)) << std::endl;
@@ -60,5 +60,12 @@ int main()
     std::cout << (*(++iter)) << std::endl;
     std::cout << (*(--iter)) << std::endl;
     std::cout << (*(--iter)) << std::endl;
+    */
+
+    s21_set<int> *set = new s21_set<int>();
+    std::cout << set->size() << std::endl;
+    set->insert(5);
+    std::cout << set->size() << std::endl;
+    
     return 0;
 }
