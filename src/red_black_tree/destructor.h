@@ -5,11 +5,12 @@ namespace s21
 {
 
     template <typename Key, typename T>
-    void RedBlackTree<Key, T>::~RedBlackTree()
+    RedBlackTree<Key, T>::~RedBlackTree()
     {
         LRNdelete(root);
     }
-
+    
+    template <typename Key, typename T>
     void RedBlackTree<Key, T>::LRNdelete(TreeNode<Key, T> *tmp)
     {
         if (tmp != nullptr)
