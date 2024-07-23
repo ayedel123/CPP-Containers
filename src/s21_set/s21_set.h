@@ -12,14 +12,13 @@ namespace s21
 
     private:
         RedBlackTree<key_type> rbtree_;
-        size_type size_ = 0;
 
     public:
-        //key_type &reference;
-        //const key_type &const_reference;
+        // key_type &reference;
+        // const key_type &const_reference;
 
         // Member functions
-        s21_set();
+        s21_set() = default;
         s21_set(std::initializer_list<key_type> const &items);
         s21_set(const s21_set &s);
         s21_set(s21_set &&s);

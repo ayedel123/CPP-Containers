@@ -5,6 +5,16 @@ namespace s21
 {
 
     template <typename Key>
+    typename RedBlackTree<Key>::iterator RedBlackTree<Key>::Find(const Key &key)
+    {
+        TreeNode<Key> *tmp = RecursiveSearch(root, key);
+
+        return (tmp)
+                   ? RedBlackTree<Key>::iterator(*tmp, this)
+                   : end();
+    }
+
+    template <typename Key>
     TreeNode<Key> *RedBlackTree<Key>::RecursiveSearch(TreeNode<Key> *parent, Key key)
     {
         TreeNode<Key> *result = nullptr;

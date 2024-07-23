@@ -7,6 +7,12 @@ namespace s21
     template <typename Key>
     RedBlackTree<Key>::~RedBlackTree()
     {
+        Clear();
+    }
+
+    template <typename Key>
+    void RedBlackTree<Key>::Clear()
+    {
         LRNdelete(root);
     }
 

@@ -26,6 +26,8 @@ namespace s21
 
         iterator operator++()
         {
+            if (!node)
+                return nullptr;
             TreeNode<Key> *result = nullptr;
 
             if (node_->right)
@@ -47,6 +49,8 @@ namespace s21
 
         iterator operator--()
         {
+            if (!node)
+                return nullptr;
             TreeNode<Key> *result = nullptr;
 
             if (node_->left)
@@ -91,7 +95,7 @@ namespace s21
     template <typename Key>
     typename RedBlackTree<Key>::iterator RedBlackTree<Key>::end()
     {
-        return typename RedBlackTree<Key>::iterator(GetMax(root), this);
+        return typename RedBlackTree<Key>::iterator(this);
     }
 }
 

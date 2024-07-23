@@ -3,11 +3,6 @@
 
 namespace s21
 {
-    template <typename key_type>
-    s21_set<key_type>::s21_set()
-    {
-        rbtree_ = * new RedBlackTree<key_type>();
-    }
 
     template <typename key_type>
     s21_set<key_type>::s21_set(const s21_set &s) : s21_set()
@@ -25,6 +20,12 @@ namespace s21
         {
             rbtree_.InsertNode(it);
         }
+    }
+
+    template <typename key_type>
+    s21_set<key_type>::s21_set(s21_set &&s)
+    {
+        this->rbtree_ = std::move(s.rbtree_);
     }
 
 }

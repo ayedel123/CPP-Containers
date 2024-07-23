@@ -12,7 +12,8 @@ namespace s21
     {
 
         black_node,
-        red_node
+        red_node,
+        nil_node
     };
 
     template <typename Key>
@@ -42,6 +43,7 @@ namespace s21
         TreeNode<Key> *root = nullptr;
 
         TreeNode<Key> *RecursiveSearch(TreeNode<Key> *parent, Key key);
+        iterator Find(const Key &key);
 
         void RotateLeft(TreeNode<Key> *node);
         void RotateRight(TreeNode<Key> *node);
@@ -95,11 +97,14 @@ namespace s21
         TreeNode<Key> *GetMax(TreeNode<Key> *tmp);
         TreeNode<Key> *Next(TreeNode<Key> *tmp);
         TreeNode<Key> *Previous(TreeNode<Key> *tmp);
+
+        void Clear();
         void LRNdelete(TreeNode<Key> *tmp);
         ~RedBlackTree();
 
         iterator begin();
         iterator end();
+
 
         void
         PrintTree(TreeNode<Key> *root)
