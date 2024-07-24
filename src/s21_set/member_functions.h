@@ -28,6 +28,19 @@ namespace s21
         this->rbtree_ = std::move(s.rbtree_);
     }
 
+    template <typename key_type>
+    s21_set<key_type> s21_set<key_type>::operator=(s21_set &&s)
+    {
+        this->rbtree_ = s.rbtree_;
+        s21_set<key_type>::iterator iter = s.begin();
+        while (iter != s.end())
+        {
+            insert(*iter);
+            ++iter;
+        }
+        return *this;
+    }
+
 }
 
 #endif

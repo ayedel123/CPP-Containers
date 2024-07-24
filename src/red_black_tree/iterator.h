@@ -26,7 +26,7 @@ namespace s21
 
         iterator operator++()
         {
-            if (!node)
+            if (!node_)
                 return nullptr;
             TreeNode<Key> *result = nullptr;
 
@@ -49,7 +49,7 @@ namespace s21
 
         iterator operator--()
         {
-            if (!node)
+            if (!node_)
                 return nullptr;
             TreeNode<Key> *result = nullptr;
 

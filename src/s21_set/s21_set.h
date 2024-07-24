@@ -24,7 +24,7 @@ namespace s21
         s21_set(s21_set &&s);
         ~s21_set();
 
-        s21_set operator=(s21_set &&s);
+        s21_set<key_type> operator=(s21_set &&s);
 
         // Iterators
         iterator begin();
