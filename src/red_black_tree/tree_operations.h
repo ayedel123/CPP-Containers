@@ -18,13 +18,13 @@ namespace s21
     TreeNode<Key> *RedBlackTree<Key>::RecursiveSearch(TreeNode<Key> *parent, Key key)
     {
         TreeNode<Key> *result = nullptr;
-        if (parent == nullptr || parent->key == key)
+        if (parent == nullptr || Equal(parent->key, key))
         {
             result = parent;
         }
         else
         {
-            result = (key < parent->key) ? RecursiveSearch(parent->left, key) : RecursiveSearch(parent->right, key);
+            result = (Less(key, parent->key)) ? RecursiveSearch(parent->left, key) : RecursiveSearch(parent->right, key);
         }
 
         return result;

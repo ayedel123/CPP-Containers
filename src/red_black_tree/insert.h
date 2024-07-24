@@ -7,9 +7,9 @@ namespace s21
     template <typename Key>
     std::pair<typename RedBlackTree<Key>::iterator, bool> RedBlackTree<Key>::InsertRecursive(TreeNode<Key> *parent, TreeNode<Key> *child)
     {
-        TreeNode<Key> **tmp = (child->key < parent->key) ? &parent->left : &parent->right;
+        TreeNode<Key> **tmp = (Less(child->key, parent->key)) ? &parent->left : &parent->right;
         std::pair<iterator, bool> result{RedBlackTree<Key>::iterator(this), false};
-        if (parent->key == child->key)
+        if (Equal(parent->key, child->key))
         {
             result = std::pair<iterator, bool>{RedBlackTree<Key>::iterator(this), false};
         }
@@ -21,7 +21,7 @@ namespace s21
             size_++;
             result = std::pair<iterator, bool>{RedBlackTree<Key>::iterator(child, this), true};
         }
-        else if ((*tmp)->key != child->key)
+        else if (!Equal((*tmp)->key, child->key))
         {
             result = InsertRecursive(*tmp, child);
         }
