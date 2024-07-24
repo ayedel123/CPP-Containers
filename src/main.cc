@@ -3,6 +3,7 @@
 #include "./red_black_tree/red_black_tree.h"
 #include <map>
 #include "./s21_set/s21_set.h"
+#include "./s21_map/s21_map.h"
 
 using namespace s21;
 

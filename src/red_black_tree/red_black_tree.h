@@ -38,8 +38,15 @@ namespace s21
 
     private:
         size_type size_ = 0;
+        bool (*Less)(const Key &v1, const Key &v2) = nullptr;
+        bool (*Equal)(const Key &v1, const Key &v2) = nullptr;
 
     public:
+        RedBlackTree() : Less([](const Key &v1, const Key &v2)
+                              { return v1 < v2; }),
+                         Equal([](const Key &v1, const Key &v2)
+                               { return v1 == v2; }) {}
+
         TreeNode<Key> *root = nullptr;
 
         TreeNode<Key> *RecursiveSearch(TreeNode<Key> *parent, Key key);
@@ -105,6 +112,11 @@ namespace s21
         iterator begin();
         iterator end();
 
+        void SetComparisonFunctions(bool (*lessFn)(const Key &v1, const Key &v2), bool (*equalFn)(const Key &v1, const Key &v2))
+        {
+            Less = lessFn;
+            Equal = equalFn;
+        }
 
         void
         PrintTree(TreeNode<Key> *root)
