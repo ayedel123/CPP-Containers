@@ -5,13 +5,22 @@ namespace s21
 {
 
     template <typename Key>
+    void RedBlackTree<Key>::Assign(iterator *iter, Key value)
+    {
+        if (iter->node != nullptr)
+        {
+            iter->node = value;
+        }
+    }
+
+    template <typename Key>
     std::pair<typename RedBlackTree<Key>::iterator, bool> RedBlackTree<Key>::InsertRecursive(TreeNode<Key> *parent, TreeNode<Key> *child)
     {
         TreeNode<Key> **tmp = (Less(child->key, parent->key)) ? &parent->left : &parent->right;
         std::pair<iterator, bool> result{RedBlackTree<Key>::iterator(this), false};
         if (Equal(parent->key, child->key))
         {
-            result = std::pair<iterator, bool>{RedBlackTree<Key>::iterator(this), false};
+            result = std::pair<iterator, bool>{RedBlackTree<Key>::iterator(parent, this), false};
         }
         else if (*tmp == nullptr)
         {

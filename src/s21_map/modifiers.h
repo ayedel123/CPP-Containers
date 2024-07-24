@@ -1,43 +1,60 @@
-#ifndef __S21_SET_MODIFIERS__
-#define __S21_SET_MODIFIERS__
+#ifndef __S21_MAP_MODIFIERS__
+#define __S21_MAP_MODIFIERS__
 
-#include "s21_set.h"
+#include "s21_map.h"
 
 namespace s21
 {
 
-    // template <typename key_type>
-    // void s21_set<key_type>::clear()
-    // {
-    //     rbtree_.Clear();
-    // }
+    template <typename Key, typename T>
+    void s21_map<Key, T>::clear()
+    {
+        rbtree_.Clear();
+    }
 
-    // template <typename key_type>
-    // std::pair<typename s21_set<key_type>::iterator, bool> s21_set<key_type>::insert(const key_type &value)
-    // {
-    //     return rbtree_.InsertNode(value);
-    // }
+    template <typename Key, typename T>
+    std::pair<typename s21_map<Key, T>::iterator, bool> s21_map<Key, T>::insert(const value_type &value)
+    {
+        return rbtree_.InsertNode(value);
+    }
 
-    // template <typename key_type>
-    // void s21_set<key_type>::erase(typename s21_set<key_type>::iterator pos)
-    // {
-    //     rbtree_.Remove(*pos);
-    // }
+    template <typename Key, typename T>
+    std::pair<typename s21_map<Key, T>::iterator, bool> s21_map<Key, T>::insert(const Key &key, const T &obj)
+    {
+        return insert(std::make_pair(key, obj));
+    }
 
-    // template <typename key_type>
-    // void s21_set<key_type>::swap(s21_set &other)
-    // {
-    //     std::swap(rbtree_, other.tree_);
-    // }
+    template <typename Key, typename T>
+    std::pair<typename s21_map<Key, T>::iterator, bool> s21_map<Key, T>::insert_or_assign(const Key &key, const T &obj)
+    {
+        auto pair = std::make_pair(key, obj);
+        std::pair<typename s21_map<Key, T>::iterator, bool> tmp = rbtree_.InsertNode(pair);
+        if (!*(tmp.second))
+        {
+            tmp.second->key = pair;
+        }
+    }
 
-    // template <typename key_type>
-    // void s21_set<key_type>::merge(s21_set &other)
-    // {
-    //     for (auto it = other.begin(); it != other.end(); it++)
-    //     {
-    //         rbtree_.InsertNode(it);
-    //     }
-    // }
+    template <typename Key, typename T>
+    void s21_map<Key, T>::erase(typename s21_map<Key, T>::iterator pos)
+    {
+        rbtree_.Remove(*pos);
+    }
+
+    template <typename Key, typename T>
+    void s21_map<Key, T>::swap(s21_map &other)
+    {
+        std::swap(rbtree_, other.tree_);
+    }
+
+    template <typename Key, typename T>
+    void s21_map<Key, T>::merge(s21_map &other)
+    {
+        for (auto it = other.begin(); it != other.end(); it++)
+        {
+            rbtree_.InsertNode(*it);
+        }
+    }
 
 }
 

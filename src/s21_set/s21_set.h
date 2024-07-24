@@ -51,5 +51,7 @@ namespace s21
 #include "member_functions.h"
 #include "modifiers.h"
 #include "capacity.h"
+#include "lookup.h"
+#include "iterator.h"
 
 #endif

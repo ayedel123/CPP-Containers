@@ -25,10 +25,10 @@ namespace s21
 
         // Member functions
         s21_map();
-        s21_map(std::initializer_list<key_type> const &items);
+        s21_map(std::initializer_list<value_type> const &items);
         s21_map(const s21_map &s);
         s21_map(s21_map &&s);
-        ~s21_map();
+        ~s21_map() = default;
 
         s21_map<Key, T> operator=(s21_map &&s);
 
@@ -78,5 +78,7 @@ namespace s21
 #include "member_functions.h"
 #include "modifiers.h"
 #include "capacity.h"
+#include "element_access.h"
+#include "lookup.h"
 
 #endif

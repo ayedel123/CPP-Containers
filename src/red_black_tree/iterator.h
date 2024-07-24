@@ -7,6 +7,9 @@ namespace s21
     template <typename Key>
     class RedBlackTree<Key>::iterator
     {
+
+        friend class RedBlackTree;
+
     private:
         RedBlackTree<Key> *parent_;
         TreeNode<Key> *node_;
@@ -80,10 +83,12 @@ namespace s21
             return (node_ == other->node_);
         }
 
-        Key operator*()
+        Key *operator*()
         {
             return node_->key;
         }
+
+        Key *operator->() const { return node_->data_; }
     };
 
     template <typename Key>

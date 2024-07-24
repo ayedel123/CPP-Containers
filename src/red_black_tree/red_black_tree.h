@@ -77,6 +77,8 @@ namespace s21
 
         // void Sort(TreeNode<Key> *tmp);
 
+        void Assign(iterator *iter, Key value);
+
         std::pair<RedBlackTree<Key>::iterator, bool> InsertRecursive(TreeNode<Key> *parent, TreeNode<Key> *child);
         std::pair<RedBlackTree<Key>::iterator, bool> InsertNode(Key key);
         void InsCase1(TreeNode<Key> *node);

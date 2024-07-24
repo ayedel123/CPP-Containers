@@ -1,5 +1,5 @@
-#ifndef __S21_SET_MEMBER_FUNCTIONS__
-#define __S21_SET_MEMBER_FUNCTIONS__
+#ifndef __S21_SET_MAP_LOOKUP__
+#define __S21_SET_MAP_LOOKUP__
 
 namespace s21
 {
