@@ -4,14 +4,14 @@
 namespace s21
 {
 
-    template <typename key_type>
-    typename s21_set<key_type>::iterator s21_set<key_type>::find(const key_type &key)
+    template <typename Key>
+    typename s21_set<Key>::iterator s21_set<Key>::find(const Key &key)
     {
         return rbtree_.find(key);
     }
 
-    template <typename key_type>
-    bool s21_set<key_type>::contains(const key_type &key)
+    template <typename Key>
+    bool s21_set<Key>::contains(const Key &key)
     {
         return ((rbtree_.find(key)) != end());
     }

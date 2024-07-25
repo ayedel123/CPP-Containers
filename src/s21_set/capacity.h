@@ -5,20 +5,20 @@
 
 namespace s21
 {
-    template <typename key_type>
-    typename s21_set<key_type>::size_type s21_set<key_type>::size()
+    template <typename Key>
+    typename s21_set<Key>::size_type s21_set<Key>::size()
     {
         return rbtree_.size();
     }
 
-    template <typename key_type>
-    typename s21_set<key_type>::size_type s21_set<key_type>::max_size()
+    template <typename Key>
+    typename s21_set<Key>::size_type s21_set<Key>::max_size()
     {
         return rbtree_.max_size();
     }
 
-    template <typename key_type>
-    bool s21_set<key_type>::empty()
+    template <typename Key>
+    bool s21_set<Key>::empty()
     {
         return (rbtree_.size_) ? true : false;
     }

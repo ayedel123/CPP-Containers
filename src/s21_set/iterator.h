@@ -4,14 +4,14 @@
 namespace s21
 {
 
-    template <typename key_type>
-    typename s21_set<key_type>::iterator s21_set<key_type>::begin()
+    template <typename Key>
+    typename s21_set<Key>::iterator s21_set<Key>::begin()
     {
         return rbtree_.begin();
     }
 
-    template <typename key_type>
-    typename s21_set<key_type>::iterator s21_set<key_type>::end()
+    template <typename Key>
+    typename s21_set<Key>::iterator s21_set<Key>::end()
     {
         return rbtree_.end();
     }

@@ -4,8 +4,8 @@
 namespace s21
 {
 
-    template <typename key_type>
-    s21_set<key_type>::s21_set(const s21_set &s) : s21_set()
+    template <typename Key>
+    s21_set<Key>::s21_set(const s21_set &s) : s21_set()
     {
         for (auto it = rbtree_.begin(); it != rbtree_.end(); ++it)
         {
@@ -13,8 +13,8 @@ namespace s21
         }
     }
 
-    template <typename key_type>
-    s21_set<key_type>::s21_set(std::initializer_list<key_type> const &items) : s21_set()
+    template <typename Key>
+    s21_set<Key>::s21_set(std::initializer_list<Key> const &items) : s21_set()
     {
         for (auto it = items.begin(); it != items.end(); it++)
         {
@@ -22,17 +22,17 @@ namespace s21
         }
     }
 
-    template <typename key_type>
-    s21_set<key_type>::s21_set(s21_set &&s)
+    template <typename Key>
+    s21_set<Key>::s21_set(s21_set &&s)
     {
         this->rbtree_ = std::move(s.rbtree_);
     }
 
-    template <typename key_type>
-    s21_set<key_type> s21_set<key_type>::operator=(s21_set &&s)
+    template <typename Key>
+    s21_set<Key> s21_set<Key>::operator=(s21_set &&s)
     {
         this->rbtree_ = s.rbtree_;
-        s21_set<key_type>::iterator iter = s.begin();
+        s21_set<Key>::iterator iter = s.begin();
         while (iter != s.end())
         {
             insert(*iter);
