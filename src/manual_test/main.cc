@@ -1,9 +1,7 @@
 #include <iostream>
 #include "my_pair.h"
-#include "./red_black_tree/red_black_tree.h"
+#include "../s21_containers.h"
 #include <map>
-#include "./s21_set/s21_set.h"
-#include "./s21_map/s21_map.h"
 
 using namespace s21;
 
@@ -67,6 +65,6 @@ int main()
     std::cout << set->size() << std::endl;
     set->insert(5);
     std::cout << set->size() << std::endl;
-    
+
     return 0;
 }
