@@ -129,8 +129,8 @@ You need to complete the classes with the appropriate methods, according to the 
 | Modifiers      | Definition                                      | Containers |
 |----------------|-------------------------------------------------| -------------------------------------------|
 | `iterator insert_many(const_iterator pos, Args&&... args)`          | Inserts new elements into the container directly before `pos`.  | List, Vector. |
-| `void insert_many_back(Args&&... args)`          | Appends new elements to the end of the container.  | List, Vector, Queue. |
-| `void insert_many_front(Args&&... args)`          | Appends new elements to the top of the container.  | List, Stack. |
+| `void insert_many_back(Args&&... args)`          | Appends new elements to the end of the container.  | List, Vector, Queue, Stack. |
+| `void insert_many_front(Args&&... args)`          | Appends new elements to the top of the container.  | List. |
 | `vector<std::pair<iterator,bool>> insert_many(Args&&... args)`          | Inserts new elements into the container.  | Map, Set, Multiset. |
 
 Note: the arguments are the already created elements of the appropriate container that should be inserted into this container.
