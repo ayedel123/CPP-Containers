@@ -61,10 +61,14 @@ int main()
     std::cout << (*(--iter)) << std::endl;
     */
 
-    s21_set<int> *set = new s21_set<int>();
-    std::cout << set->size() << std::endl;
-    set->insert(5);
-    std::cout << set->size() << std::endl;
+    s21::set<int> set = {};
+    s21::set<int>::const_iterator begin_iter = set.cbegin();
+    s21::set<int>::const_iterator end_iter = set.cend();
+    if (begin_iter != end_iter)
+        std::cout << "empty" << std::endl;
+    // std::cout << set.empty() << std::endl;
+    // set.insert(5);
+    // std::cout << set.size() << std::endl;
 
     return 0;
 }

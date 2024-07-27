@@ -1,7 +1,7 @@
 #ifndef __S21_SET_MODIFIERS__
 #define __S21_SET_MODIFIERS__
 
-#include "set.h"
+#include "s21_set.h"
 
 namespace s21
 {

@@ -13,8 +13,9 @@ namespace s21
         using size_type = typename RedBlackTree<key_type>::size_type;
         using iterator = typename RedBlackTree<key_type>::iterator;
         using value_type = std::pair<const key_type, mapped_type>;
-        using reference = value_type &;
-        using const_reference = const value_type &;
+        using reference = typename RedBlackTree<key_type>::reference;
+        using const_reference = typename RedBlackTree<key_type>::const_reference;
+        using const_iterator = typename RedBlackTree<Key>::const_iterator;
 
     private:
         RedBlackTree<value_type> rbtree_;

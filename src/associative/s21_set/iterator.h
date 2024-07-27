@@ -16,6 +16,18 @@ namespace s21
         return rbtree_.end();
     }
 
+    template <typename Key>
+    typename set<Key>::const_iterator set<Key>::cbegin() const
+    {
+        return rbtree_.cbegin();
+    }
+
+    template <typename Key>
+    typename set<Key>::const_iterator set<Key>::cend() const
+    {
+        return rbtree_.cend();
+    }
+
 }
 
 #endif

@@ -5,8 +5,10 @@ namespace s21
 {
 
     template <typename Key>
-    TreeNode<Key> *RedBlackTree<Key>::GetMin(TreeNode<Key> *tmp)
+    TreeNode<Key> *RedBlackTree<Key>::GetMin(TreeNode<Key> *tmp) const
     {
+        if (root == nullptr)
+            return nullptr;
         if (tmp == nullptr)
             tmp = root;
         while (tmp->left != nullptr)
@@ -17,8 +19,10 @@ namespace s21
     }
 
     template <typename Key>
-    TreeNode<Key> *RedBlackTree<Key>::GetMax(TreeNode<Key> *tmp)
+    TreeNode<Key> *RedBlackTree<Key>::GetMax(TreeNode<Key> *tmp) const
     {
+        if (root == nullptr)
+            return nullptr;
         if (tmp == nullptr)
             tmp = root;
         while (tmp->right != nullptr)

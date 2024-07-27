@@ -5,9 +5,8 @@ namespace s21
 {
 
     template <typename Key>
-    class RedBlackTree<Key>::iterator
+    class RedBlackTree<Key>::Iterator
     {
-
         friend class RedBlackTree;
 
     private:
@@ -15,22 +14,22 @@ namespace s21
         TreeNode<Key> *node_;
 
     public:
-        iterator(RedBlackTree<Key> *parent)
+        Iterator(RedBlackTree<Key> *parent)
         {
             node_ = nullptr;
             parent_ = parent;
         }
 
-        iterator(TreeNode<Key> *node, RedBlackTree<Key> *parent)
+        Iterator(TreeNode<Key> *node, RedBlackTree<Key> *parent)
         {
             node_ = node;
             parent_ = parent;
         }
 
-        iterator operator++()
+        Iterator operator++()
         {
             if (!node_)
-                return nullptr;
+                return ConstIterator(parent_);
             TreeNode<Key> *result = nullptr;
 
             if (node_->right)
@@ -50,10 +49,10 @@ namespace s21
             return *this;
         }
 
-        iterator operator--()
+        Iterator operator--()
         {
             if (!node_)
-                return nullptr;
+                return ConstIterator(parent_);
             TreeNode<Key> *result = nullptr;
 
             if (node_->left)
@@ -74,34 +73,133 @@ namespace s21
             return *this;
         }
 
-        bool operator==(const iterator &other) const
+        bool operator==(Iterator &other)
         {
             return (node_ == other->node_);
         }
-        bool operator!=(const iterator &other) const
+        bool operator!=(Iterator &other)
         {
             return (node_ == other->node_);
         }
 
-        Key *operator*()
+        reference operator*()
         {
             return node_->key;
         }
 
-        Key *operator->() const { return node_->data_; }
+        pointer operator->() const { return node_->data_; }
     };
 
     template <typename Key>
-    typename RedBlackTree<Key>::iterator RedBlackTree<Key>::begin()
+    class RedBlackTree<Key>::ConstIterator
     {
-        return typename RedBlackTree<Key>::iterator(GetMin(root), this);
+        friend class RedBlackTree;
+
+    private:
+        RedBlackTree<Key> *parent_;
+        TreeNode<Key> *node_;
+
+    public:
+        ConstIterator(RedBlackTree<Key> *parent)
+        {
+            node_ = nullptr;
+            parent_ = parent;
+        }
+
+        ConstIterator(TreeNode<Key> *node, RedBlackTree<Key> *parent)
+        {
+            node_ = node;
+            parent_ = parent;
+        }
+
+        ConstIterator operator++() const
+        {
+            if (!node_)
+                return ConstIterator(parent_);
+            TreeNode<Key> *result = nullptr;
+            TreeNode<Key> *tmp = node_;
+            if (tmp->right)
+            {
+                result = parent_->GetMin(tmp->right);
+            }
+            else
+            {
+                result = tmp->parent;
+                while (result && tmp == result->right)
+                {
+                    tmp = result;
+                    result = tmp->parent;
+                }
+            }
+            tmp = result;
+            return ConstIterator(tmp, parent_);
+        }
+
+        ConstIterator operator--() const
+        {
+            if (!node_)
+                return ConstIterator(parent_);
+            TreeNode<Key> *result = nullptr;
+            TreeNode<Key> *tmp = node_;
+            if (tmp->left)
+            {
+                result = parent_->GetMax(tmp->left);
+            }
+            else
+            {
+                result = tmp->parent;
+                while (result && tmp == result->left)
+                {
+                    tmp = result;
+                    result = tmp->parent;
+                }
+            }
+
+            tmp = result;
+            return ConstIterator(tmp, parent_);
+        }
+
+        bool operator==(const ConstIterator &other) const
+        {
+            return (node_ == other.node_);
+        }
+        bool operator!=(const ConstIterator &other) const
+        {
+            return (node_ != other.node_);
+        }
+
+        const_reference operator*() const
+        {
+            return node_->key;
+        }
+
+        const pointer operator->() const { return node_->data_; }
+    };
+
+    template <typename Key>
+    typename RedBlackTree<Key>::Iterator RedBlackTree<Key>::begin()
+    {
+        return typename RedBlackTree<Key>::Iterator(GetMin(root), this);
     }
 
     template <typename Key>
-    typename RedBlackTree<Key>::iterator RedBlackTree<Key>::end()
+    typename RedBlackTree<Key>::Iterator RedBlackTree<Key>::end()
     {
-        return typename RedBlackTree<Key>::iterator(this);
+        return typename RedBlackTree<Key>::Iterator(this);
     }
+
+    template <typename Key>
+    typename RedBlackTree<Key>::ConstIterator RedBlackTree<Key>::cbegin() const
+    {
+        return typename RedBlackTree<Key>::ConstIterator(GetMin(root), const_cast<RedBlackTree<Key> *>(this));
+    }
+
+    template <typename Key>
+    typename RedBlackTree<Key>::ConstIterator RedBlackTree<Key>::cend() const
+    {
+        return typename RedBlackTree<Key>::ConstIterator(nullptr, const_cast<RedBlackTree<Key> *>(this));
+    }
+
 }
 
 #endif

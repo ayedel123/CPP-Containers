@@ -1,7 +1,7 @@
 #ifndef __S21_MAP_CAPACITY__
 #define __S21_MAP_CAPACITY__
 
-#include "map.h"
+#include "s21_map.h"
 
 namespace s21
 {

@@ -7,8 +7,14 @@ namespace s21
     template <typename Key>
     class set
     {
-        using size_type = typename RedBlackTree<Key>::size_type;
-        using iterator = typename RedBlackTree<Key>::iterator;
+    public:
+        using key_type = Key;
+        using size_type = typename RedBlackTree<key_type>::size_type;
+        using iterator = typename RedBlackTree<key_type>::iterator;
+        using value_type = key_type;
+        using reference = typename RedBlackTree<key_type>::reference;
+        using const_reference = typename RedBlackTree<key_type>::const_reference;
+        using const_iterator = typename RedBlackTree<Key>::const_iterator;
 
     private:
         RedBlackTree<Key> rbtree_;
@@ -22,18 +28,20 @@ namespace s21
         set(std::initializer_list<Key> const &items);
         set(const set &s);
         set(set &&s);
-        ~set();
+        ~set() = default;
 
         set<Key> operator=(set &&s);
 
         // Iterators
         iterator begin();
+        const_iterator cbegin() const;
         iterator end();
+        const_iterator cend() const;
 
         // Capacity
-        bool empty();
-        size_type size();
-        size_type max_size();
+        bool empty() const;
+        size_type size() const;
+        size_type max_size() const;
 
         // Modifiers
         void clear();

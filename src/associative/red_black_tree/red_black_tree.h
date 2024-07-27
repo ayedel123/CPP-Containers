@@ -30,14 +30,24 @@ namespace s21
     class RedBlackTree
     {
 
+    private:
+        class Iterator;
+        class ConstIterator;
+
     public:
         using value_type = Key;
         using size_type = size_t;
         using difference_type = std::ptrdiff_t;
-        class iterator;
+        using reference = value_type &;
+        using const_reference = const value_type &;
+        using pointer = Key *;
+        using const_pointer = const pointer;
+        using iterator = Iterator;
+        using const_iterator = ConstIterator;
+
+        size_type size_ = 0;
 
     private:
-        size_type size_ = 0;
         bool (*Less)(const Key &v1, const Key &v2) = nullptr;
         bool (*Equal)(const Key &v1, const Key &v2) = nullptr;
 
@@ -59,17 +69,17 @@ namespace s21
         TreeNode<Key> *GetGrandpa(TreeNode<Key> *node);
         TreeNode<Key> *GetUncle(TreeNode<Key> *node);
 
-        size_type size()
+        size_type size() const
         {
             return size_;
         }
 
-        bool empty()
+        bool empty() const
         {
-            return (size_ == 0) ? true : false;
+            return (size() == 0) ? true : false;
         }
 
-        size_type max_size()
+        size_type max_size() const
         {
             return std::numeric_limits<difference_type>::max() /
                    sizeof(TreeNode<Key>);
@@ -102,17 +112,20 @@ namespace s21
         TreeNode<Key> *Sibling(TreeNode<Key> *node);
 
         // Walkfer functions
-        TreeNode<Key> *GetMin(TreeNode<Key> *tmp);
-        TreeNode<Key> *GetMax(TreeNode<Key> *tmp);
+        TreeNode<Key> *GetMin(TreeNode<Key> *tmp) const;
+        TreeNode<Key> *GetMax(TreeNode<Key> *tmp) const;
         TreeNode<Key> *Next(TreeNode<Key> *tmp);
         TreeNode<Key> *Previous(TreeNode<Key> *tmp);
 
         void Clear();
         void LRNdelete(TreeNode<Key> *tmp);
+
         ~RedBlackTree();
 
         iterator begin();
         iterator end();
+        ConstIterator cbegin() const;
+        ConstIterator cend() const;
 
         void SetComparisonFunctions(bool (*lessFn)(const Key &v1, const Key &v2), bool (*equalFn)(const Key &v1, const Key &v2))
         {
