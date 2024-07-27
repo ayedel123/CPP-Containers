@@ -38,7 +38,7 @@ namespace s21
     }
 
     template <typename Key>
-    std::pair<typename RedBlackTree<Key>::iterator, bool> RedBlackTree<Key>::InsertNode(Key key)
+    std::pair<typename RedBlackTree<Key>::iterator, bool> RedBlackTree<Key>::InsertNode(const Key key)
     {
 
         TreeNode<Key> *newNode = new TreeNode<Key>{key, nullptr, nullptr, nullptr, red_node};

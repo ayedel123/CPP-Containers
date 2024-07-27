@@ -112,7 +112,7 @@ namespace s21
             parent_ = parent;
         }
 
-        ConstIterator operator++() const
+        ConstIterator operator++()
         {
             if (!node_)
                 return ConstIterator(parent_);
@@ -132,7 +132,9 @@ namespace s21
                 }
             }
             tmp = result;
-            return ConstIterator(tmp, parent_);
+            node_ = tmp;
+            // return ConstIterator(tmp, parent_);
+            return *this;
         }
 
         ConstIterator operator--() const
@@ -156,7 +158,9 @@ namespace s21
             }
 
             tmp = result;
-            return ConstIterator(tmp, parent_);
+            node_ = tmp;
+            // return ConstIterator(tmp, parent_);
+            return *this;
         }
 
         bool operator==(const ConstIterator &other) const

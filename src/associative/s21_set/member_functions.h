@@ -18,7 +18,7 @@ namespace s21
     {
         for (auto it = items.begin(); it != items.end(); it++)
         {
-            rbtree_.InsertNode(it);
+            rbtree_.InsertNode(*it);
         }
     }
 

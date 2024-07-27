@@ -62,6 +62,7 @@ int main()
     */
 
     s21::set<int> set = {};
+    set.insert(1);
     s21::set<int>::const_iterator begin_iter = set.cbegin();
     s21::set<int>::const_iterator end_iter = set.cend();
     if (begin_iter != end_iter)

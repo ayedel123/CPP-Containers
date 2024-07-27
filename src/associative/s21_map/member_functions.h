@@ -5,11 +5,7 @@ namespace s21
 {
 
     template <typename Key, typename T>
-    map<Key, T>::map() : map()
-    {
-        rbtree_ = RedBlackTree(PairLess, PairEqual);
-    }
-
+    map<Key, T>::map() : rbtree_(&map<Key, T>::PairLess, &map<Key, T>::PairEqual) {}
     template <typename Key, typename T>
     map<Key, T>::map(const map &s) : map()
     {
@@ -24,12 +20,12 @@ namespace s21
     {
         for (auto it = items.begin(); it != items.end(); it++)
         {
-            rbtree_.InsertNode(value_type{it.first, it.second});
+            rbtree_.InsertNode(value_type{it->first, it->second});
         }
     }
 
     template <typename Key, typename T>
-    map<Key, T>::map(map &&s)
+    map<Key, T>::map(map &&s) : map()
     {
         this->rbtree_ = std::move(s.rbtree_);
     }

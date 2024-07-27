@@ -16,3 +16,10 @@ TEST_F(SetTestCase, case_1)
     std::set<int> std_set = {};
     AssertContainerEquality(s21_set, std_set);
 }
+
+TEST_F(SetTestCase, case_2)
+{
+    s21::set<int> s21_set = {1};
+    std::set<int> std_set = {1};
+    AssertContainerEquality(s21_set, std_set);
+}

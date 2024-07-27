@@ -56,7 +56,8 @@ namespace s21
                               { return v1 < v2; }),
                          Equal([](const Key &v1, const Key &v2)
                                { return v1 == v2; }) {}
-
+        RedBlackTree(bool (*lessFn)(const Key &, const Key &), bool (*equalFn)(const Key &, const Key &))
+            : Less(lessFn), Equal(equalFn) {}
         TreeNode<Key> *root = nullptr;
 
         TreeNode<Key> *RecursiveSearch(TreeNode<Key> *parent, Key key);
@@ -90,7 +91,7 @@ namespace s21
         void Assign(iterator *iter, Key value);
 
         std::pair<RedBlackTree<Key>::iterator, bool> InsertRecursive(TreeNode<Key> *parent, TreeNode<Key> *child);
-        std::pair<RedBlackTree<Key>::iterator, bool> InsertNode(Key key);
+        std::pair<RedBlackTree<Key>::iterator, bool> InsertNode(const Key key);
         void InsCase1(TreeNode<Key> *node);
         void InsCase2(TreeNode<Key> *node);
         void InsCase3(TreeNode<Key> *node);

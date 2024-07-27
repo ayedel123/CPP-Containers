@@ -10,12 +10,13 @@ namespace s21
     {
         using key_type = Key;
         using mapped_type = T;
-        using size_type = typename RedBlackTree<key_type>::size_type;
-        using iterator = typename RedBlackTree<key_type>::iterator;
         using value_type = std::pair<const key_type, mapped_type>;
-        using reference = typename RedBlackTree<key_type>::reference;
-        using const_reference = typename RedBlackTree<key_type>::const_reference;
-        using const_iterator = typename RedBlackTree<Key>::const_iterator;
+        using size_type = typename RedBlackTree<key_type>::size_type;
+        using iterator = typename RedBlackTree<value_type>::iterator;
+
+        using reference = typename RedBlackTree<value_type>::reference;
+        using const_reference = typename RedBlackTree<value_type>::const_reference;
+        using const_iterator = typename RedBlackTree<value_type>::const_iterator;
 
     private:
         RedBlackTree<value_type> rbtree_;
@@ -39,12 +40,14 @@ namespace s21
 
         // Iterators
         iterator begin();
+        const_iterator cbegin() const;
         iterator end();
+        const_iterator cend() const;
 
         // Capacity
-        bool empty();
-        size_type size();
-        size_type max_size();
+        bool empty() const;
+        size_type size() const;
+        size_type max_size() const;
 
         // Modifiers
         void clear();
@@ -64,14 +67,14 @@ namespace s21
         // Secret
 
     private:
-        bool PairLess(value_type v1, value_type v2)
+        static bool PairLess(const value_type &v1, const value_type &v2)
         {
-            return v1->first < v2->first;
+            return v1.first < v2.first;
         }
 
-        bool PairEqual(value_type v1, value_type v2)
+        static bool PairEqual(const value_type &v1, const value_type &v2)
         {
-            return v1->first == v2->first;
+            return v1.first == v2.first;
         }
     };
 }
@@ -81,5 +84,6 @@ namespace s21
 #include "capacity.h"
 #include "element_access.h"
 #include "lookup.h"
+#include "iterator.h"
 
 #endif
