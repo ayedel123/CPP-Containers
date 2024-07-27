@@ -1,24 +1,24 @@
 #ifndef __S21_SET_CAPACITY__
 #define __S21_SET_CAPACITY__
 
-#include "s21_set.h"
+#include "set.h"
 
 namespace s21
 {
     template <typename Key>
-    typename s21_set<Key>::size_type s21_set<Key>::size()
+    typename set<Key>::size_type set<Key>::size()
     {
         return rbtree_.size();
     }
 
     template <typename Key>
-    typename s21_set<Key>::size_type s21_set<Key>::max_size()
+    typename set<Key>::size_type set<Key>::max_size()
     {
         return rbtree_.max_size();
     }
 
     template <typename Key>
-    bool s21_set<Key>::empty()
+    bool set<Key>::empty()
     {
         return (rbtree_.size_) ? true : false;
     }

@@ -5,13 +5,13 @@ namespace s21
 {
 
     template <typename Key, typename T>
-    s21_map<Key, T>::s21_map() : s21_map()
+    map<Key, T>::map() : map()
     {
         rbtree_ = RedBlackTree(PairLess, PairEqual);
     }
 
     template <typename Key, typename T>
-    s21_map<Key, T>::s21_map(const s21_map &s) : s21_map()
+    map<Key, T>::map(const map &s) : map()
     {
         for (auto it = rbtree_.begin(); it != rbtree_.end(); ++it)
         {
@@ -20,7 +20,7 @@ namespace s21
     }
 
     template <typename Key, typename T>
-    s21_map<Key, T>::s21_map(std::initializer_list<value_type> const &items) : s21_map()
+    map<Key, T>::map(std::initializer_list<value_type> const &items) : map()
     {
         for (auto it = items.begin(); it != items.end(); it++)
         {
@@ -29,16 +29,16 @@ namespace s21
     }
 
     template <typename Key, typename T>
-    s21_map<Key, T>::s21_map(s21_map &&s)
+    map<Key, T>::map(map &&s)
     {
         this->rbtree_ = std::move(s.rbtree_);
     }
 
     template <typename Key, typename T>
-    s21_map<Key, T> s21_map<Key, T>::operator=(s21_map &&s)
+    map<Key, T> map<Key, T>::operator=(map &&s)
     {
         this->rbtree_ = s.rbtree_;
-        s21_map<Key, T>::iterator iter = s.begin();
+        map<Key, T>::iterator iter = s.begin();
         while (iter != s.end())
         {
             insert(*iter);

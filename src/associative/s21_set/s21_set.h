@@ -5,7 +5,7 @@
 namespace s21
 {
     template <typename Key>
-    class s21_set
+    class set
     {
         using size_type = typename RedBlackTree<Key>::size_type;
         using iterator = typename RedBlackTree<Key>::iterator;
@@ -18,13 +18,13 @@ namespace s21
         // const Key &const_reference;
 
         // Member functions
-        s21_set() = default;
-        s21_set(std::initializer_list<Key> const &items);
-        s21_set(const s21_set &s);
-        s21_set(s21_set &&s);
-        ~s21_set();
+        set() = default;
+        set(std::initializer_list<Key> const &items);
+        set(const set &s);
+        set(set &&s);
+        ~set();
 
-        s21_set<Key> operator=(s21_set &&s);
+        set<Key> operator=(set &&s);
 
         // Iterators
         iterator begin();
@@ -39,8 +39,8 @@ namespace s21
         void clear();
         std::pair<iterator, bool> insert(const Key &value);
         void erase(iterator pos);
-        void swap(s21_set &other);
-        void merge(s21_set &other);
+        void swap(set &other);
+        void merge(set &other);
 
         // Lookup
         iterator find(const Key &key);

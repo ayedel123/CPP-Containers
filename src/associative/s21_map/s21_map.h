@@ -6,7 +6,7 @@
 namespace s21
 {
     template <typename Key, typename T>
-    class s21_map
+    class map
     {
         using key_type = Key;
         using mapped_type = T;
@@ -24,13 +24,13 @@ namespace s21
         // const key_type &const_reference;
 
         // Member functions
-        s21_map();
-        s21_map(std::initializer_list<value_type> const &items);
-        s21_map(const s21_map &s);
-        s21_map(s21_map &&s);
-        ~s21_map() = default;
+        map();
+        map(std::initializer_list<value_type> const &items);
+        map(const map &s);
+        map(map &&s);
+        ~map() = default;
 
-        s21_map<Key, T> operator=(s21_map &&s);
+        map<Key, T> operator=(map &&s);
 
         // Element access
         T &at(const Key &key);
@@ -53,8 +53,8 @@ namespace s21
         std::pair<iterator, bool> insert_or_assign(const Key &key, const T &obj);
 
         void erase(iterator pos);
-        void swap(s21_map &other);
-        void merge(s21_map &other);
+        void swap(map &other);
+        void merge(map &other);
 
         // Lookup
         iterator find(const key_type &key);

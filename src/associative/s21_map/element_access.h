@@ -5,7 +5,7 @@ namespace s21
 {
 
     template <typename Key, typename T>
-    T &s21_map<Key, T>::at(const Key &key)
+    T &map<Key, T>::at(const Key &key)
     {
         value_type *tmp = nullptr;
         if (!rbtree_.root)
@@ -24,7 +24,7 @@ namespace s21
     }
 
     template <typename Key, typename T>
-    T &s21_map<Key, T>::operator[](const Key &key)
+    T &map<Key, T>::operator[](const Key &key)
     {
         return at(key);
     }

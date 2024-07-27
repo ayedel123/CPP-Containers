@@ -1,37 +1,37 @@
 #ifndef __S21_SET_MODIFIERS__
 #define __S21_SET_MODIFIERS__
 
-#include "s21_set.h"
+#include "set.h"
 
 namespace s21
 {
 
     template <typename Key>
-    void s21_set<Key>::clear()
+    void set<Key>::clear()
     {
         rbtree_.Clear();
     }
 
     template <typename Key>
-    std::pair<typename s21_set<Key>::iterator, bool> s21_set<Key>::insert(const Key &value)
+    std::pair<typename set<Key>::iterator, bool> set<Key>::insert(const Key &value)
     {
         return rbtree_.InsertNode(value);
     }
 
     template <typename Key>
-    void s21_set<Key>::erase(typename s21_set<Key>::iterator pos)
+    void set<Key>::erase(typename set<Key>::iterator pos)
     {
         rbtree_.Remove(*pos);
     }
 
     template <typename Key>
-    void s21_set<Key>::swap(s21_set &other)
+    void set<Key>::swap(set &other)
     {
         std::swap(rbtree_, other.tree_);
     }
 
     template <typename Key>
-    void s21_set<Key>::merge(s21_set &other)
+    void set<Key>::merge(set &other)
     {
         for (auto it = other.begin(); it != other.end(); it++)
         {
