@@ -12,14 +12,14 @@ TEST_SOURCES = ./test/containers_test.cc \
 test: clean
 	$(GPP) $(CFLAGS)  $(TEST_SOURCES)  $(TESTFLAGS) -o test.out
 
-manual_test: clean
-	$(GPP) $(CFLAGS) ./manual_test/main.cc -o manual_test.out
+man_test: clean
+	$(GPP) $(CFLAGS) ./manual_test/main.cc -o test.out
 
 run:
 	./test.out
 
-run_manual:
-	./manual_test.out
+valgrind:
+	valgrind --tool=memcheck --leak-check=yes  ./test.out
 
 clean:
 	rm -rf *.out

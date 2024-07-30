@@ -14,6 +14,8 @@ namespace s21
     void RedBlackTree<Key>::Clear()
     {
         LRNdelete(root);
+        root = nullptr;
+        size_ = 0;
     }
 
     template <typename Key>
@@ -24,7 +26,7 @@ namespace s21
             LRNdelete(tmp->left);
             LRNdelete(tmp->right);
             delete tmp;
-            tmp = nullptr; 
+            tmp = nullptr;
         }
     }
 

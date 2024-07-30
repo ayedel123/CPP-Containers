@@ -29,7 +29,7 @@ namespace s21
         Iterator operator++()
         {
             if (!node_)
-                return ConstIterator(parent_);
+                return Iterator(parent_);
             TreeNode<Key> *result = nullptr;
 
             if (node_->right)
@@ -52,7 +52,7 @@ namespace s21
         Iterator operator--()
         {
             if (!node_)
-                return ConstIterator(parent_);
+                return Iterator(parent_);
             TreeNode<Key> *result = nullptr;
 
             if (node_->left)
@@ -73,13 +73,13 @@ namespace s21
             return *this;
         }
 
-        bool operator==(Iterator &other)
+        bool operator==(const Iterator &other)
         {
-            return (node_ == other->node_);
+            return (node_ == other.node_)?true:(!node_ || !other.node_)?false:(node_->key==other.node_->key);
         }
-        bool operator!=(Iterator &other)
+        bool operator!=(const Iterator &other)
         {
-            return (node_ == other->node_);
+            return !(*this == other);
         }
 
         reference operator*()
@@ -87,7 +87,7 @@ namespace s21
             return node_->key;
         }
 
-        pointer operator->() const { return node_->data_; }
+        pointer operator->() const { return &(node_->key); }
     };
 
     template <typename Key>

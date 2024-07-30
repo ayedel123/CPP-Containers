@@ -7,13 +7,13 @@ namespace s21
     template <typename Key>
     typename set<Key>::iterator set<Key>::find(const Key &key)
     {
-        return rbtree_.find(key);
+        return rbtree_.Find(key);
     }
 
     template <typename Key>
     bool set<Key>::contains(const Key &key)
     {
-        return ((rbtree_.find(key)) != end());
+        return (find(key) != end());
     }
 
 }

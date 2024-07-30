@@ -55,6 +55,10 @@ namespace s21
         {
             result = InsertRecursive(root, newNode);
         }
+        if (!result.second)
+        {
+            delete (newNode);
+        }
         return result;
     }
 

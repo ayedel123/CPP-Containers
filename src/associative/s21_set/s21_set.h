@@ -31,6 +31,7 @@ namespace s21
         ~set() = default;
 
         set<Key> operator=(set &&s);
+        set<Key> &operator=(const set &s);
 
         // Iterators
         iterator begin();

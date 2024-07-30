@@ -58,6 +58,15 @@ namespace s21
                                { return v1 == v2; }) {}
         RedBlackTree(bool (*lessFn)(const Key &, const Key &), bool (*equalFn)(const Key &, const Key &))
             : Less(lessFn), Equal(equalFn) {}
+
+        RedBlackTree(const RedBlackTree &other);
+        RedBlackTree(RedBlackTree<Key> &&other) noexcept;
+
+        void swap(RedBlackTree<Key> &first, RedBlackTree<Key> &second) noexcept;
+
+        RedBlackTree<Key> &operator=(const RedBlackTree &other);
+        RedBlackTree<Key> &operator=(RedBlackTree &&other);
+
         TreeNode<Key> *root = nullptr;
 
         TreeNode<Key> *RecursiveSearch(TreeNode<Key> *parent, Key key);

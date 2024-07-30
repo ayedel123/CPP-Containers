@@ -10,7 +10,7 @@ namespace s21
         TreeNode<Key> *tmp = RecursiveSearch(root, key);
 
         return (tmp)
-                   ? RedBlackTree<Key>::iterator(*tmp, this)
+                   ? RedBlackTree<Key>::iterator(tmp, this)
                    : end();
     }
 
@@ -129,6 +129,60 @@ namespace s21
         {
             return nullptr;
         }
+    }
+
+    template <typename Key>
+    RedBlackTree<Key>::RedBlackTree(const RedBlackTree &other)
+    {
+        for (auto it = other.cbegin(); it != other.cend(); ++it)
+        {
+            InsertNode(*it);
+        }
+    }
+
+    template <typename Key>
+    RedBlackTree<Key> &RedBlackTree<Key>::operator=(const RedBlackTree &other)
+    {
+        if (this != &other)
+        {
+            Clear();
+            for (auto it = other.cbegin(); it != other.cend(); ++it)
+            {
+                InsertNode(*it);
+            }
+        }
+        return *this;
+    }
+
+    template <typename Key>
+    RedBlackTree<Key> &RedBlackTree<Key>::operator=(RedBlackTree &&other)
+    {
+        if (this != &other)
+        {
+            Clear();
+            root = other.root;
+            size_ = other.size_;
+            other.size_ = 0;
+        }
+        return *this;
+    }
+
+    template <typename Key>
+    RedBlackTree<Key>::RedBlackTree(RedBlackTree<Key> &&other) noexcept
+    {
+        Clear();
+        root = other.root;
+        size_ = other.size_;
+        other.root = nullptr;
+        other.size_ = 0;
+    }
+
+    template <typename Key>
+    void RedBlackTree<Key>::swap(RedBlackTree<Key> &first, RedBlackTree<Key> &second) noexcept
+    {
+        using std::swap;
+        swap(first.root, second.root);
+        swap(first.size_, second.size_);
     }
 
 }

@@ -27,15 +27,19 @@ namespace s21
     template <typename Key>
     void set<Key>::swap(set &other)
     {
-        std::swap(rbtree_, other.tree_);
+        if (this != &other)
+        {
+            rbtree_.swap(rbtree_, other.rbtree_);
+        }
     }
 
     template <typename Key>
     void set<Key>::merge(set &other)
     {
-        for (auto it = other.begin(); it != other.end(); it++)
+        for (auto it = other.begin(); it != other.end(); ++it)
         {
-            rbtree_.InsertNode(*it);
+            if ((insert(*it)).second)
+                other.erase(it);
         }
     }
 

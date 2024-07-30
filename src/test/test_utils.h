@@ -30,12 +30,12 @@ namespace s21
             if constexpr (HasFirstAndSecond<decltype(first_iter)>::value &&
                           HasFirstAndSecond<decltype(second_iter)>::value)
             {
-                // ASSERT_EQ(first_iter->first, second_iter->first);
-                //  ASSERT_EQ(first_iter->second, second_iter->second);
+                ASSERT_EQ(first_iter->first, second_iter->first);
+                ASSERT_EQ(first_iter->second, second_iter->second);
             }
             else
             {
-                // ASSERT_EQ(*first_iter, *second_iter);
+                ASSERT_EQ(*first_iter, *second_iter);
             }
             ++first_iter;
             ++second_iter;
