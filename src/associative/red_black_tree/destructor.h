@@ -25,7 +25,7 @@ namespace s21
         {
             LRNdelete(tmp->left);
             LRNdelete(tmp->right);
-            DeleteNode(tmp);
+            delete tmp;
             tmp = nullptr;
         }
     }

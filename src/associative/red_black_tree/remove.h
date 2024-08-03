@@ -8,19 +8,16 @@ namespace s21
     void RBTree<Key>::Remove(Key key)
     {
         Node<Key> *tmp = (root != nullptr) ? RecursiveSearch(root, key) : nullptr;
-        bool end = false;
         if (!tmp)
-        {
-            end = true;
-        }
+            return;
+
         size_--;
-        if (!end && !tmp->parent && !tmp->left && !tmp->right)
+        if (!tmp->parent && !tmp->left && !tmp->right)
         {
 
             root = nullptr;
-            end = true;
         }
-        if (!end)
+        if (root)
         {
             if (tmp->left && tmp->right)
             {
@@ -30,6 +27,7 @@ namespace s21
             if (!child)
             {
                 HandleChildFree(tmp);
+                // delete tmp;
             }
 
             else
@@ -37,6 +35,8 @@ namespace s21
                 HanldeIfChild(tmp, child);
             }
         }
+        delete tmp;
+
     }
 
     template <typename Key>
@@ -48,9 +48,9 @@ namespace s21
             removed = removed->right;
         }
         // f***k const
-        // AssignKey(tmp, removed->key);
 
-        tmp->key = removed->key;
+        delete tmp->key;
+        tmp->key = new Key{*(removed->key)};
         return removed;
     }
 
@@ -82,10 +82,12 @@ namespace s21
         {
             if (tmp == p->left)
             {
+                // DeleteNode(p->left);
                 p->left = child;
             }
             else
             {
+                // DeleteNode(p->right);
                 p->right = child;
             }
         }

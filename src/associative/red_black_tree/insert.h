@@ -45,24 +45,24 @@ namespace s21
     std::pair<typename RBTree<Key>::iterator, bool> RBTree<Key>::InsertNode(const Key key)
     {
 
-        Node<Key> *newNode = new Node<Key>{new Key{key}, nullptr, nullptr, nullptr, red_node};
+        Node<Key> *new_node = new Node<Key>{new Key{key}, nullptr, nullptr, nullptr, red_node};
         std::pair<iterator, bool> result{end(), false};
 
         if (root == nullptr)
         {
-            root = newNode;
+            root = new_node;
             root->color = black_node;
             size_++;
             result = std::pair<iterator, bool>{RBTree<Key>::iterator(root, this), true};
         }
         else
         {
-            result = InsertRecursive(root, newNode);
+            result = InsertRecursive(root, new_node);
         }
         if (!result.second)
         {
 
-            DeleteNode(newNode);
+            delete new_node;
         }
         return result;
     }

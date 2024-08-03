@@ -23,6 +23,11 @@ namespace s21
         Node<Key> *right = nullptr;
         Node<Key> *parent = nullptr;
         bool color = black_node;
+
+        ~Node()
+        {
+                delete key;
+        }
         bool operator<(const Node<Key> &other) const
         {
             return *key < *other.key;
@@ -119,11 +124,6 @@ namespace s21
         Node<Key> *HandleTwoChildren(Node<Key> *tmp);
         void HandleChildFree(Node<Key> *tmp);
         void HanldeIfChild(Node<Key> *tmp, Node<Key> *child);
-        void DeleteNode(Node<Key> *node)
-        {
-            delete (node->key);
-            delete (node);
-        }
 
         void LRNdelete(Node<Key> *tmp);
 
