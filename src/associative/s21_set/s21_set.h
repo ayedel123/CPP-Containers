@@ -9,15 +9,15 @@ namespace s21
     {
     public:
         using key_type = Key;
-        using size_type = typename RedBlackTree<key_type>::size_type;
-        using iterator = typename RedBlackTree<key_type>::iterator;
+        using size_type = typename RBTree<key_type>::size_type;
+        using iterator = typename RBTree<key_type>::iterator;
         using value_type = key_type;
-        using reference = typename RedBlackTree<key_type>::reference;
-        using const_reference = typename RedBlackTree<key_type>::const_reference;
-        using const_iterator = typename RedBlackTree<Key>::const_iterator;
+        using reference = typename RBTree<key_type>::reference;
+        using const_reference = typename RBTree<key_type>::const_reference;
+        using const_iterator = typename RBTree<Key>::const_iterator;
 
     private:
-        RedBlackTree<Key> rbtree_;
+        RBTree<Key> rbtree_;
 
     public:
         // Key &reference;
@@ -35,9 +35,9 @@ namespace s21
 
         // Iterators
         iterator begin();
-        const_iterator cbegin() const;
         iterator end();
-        const_iterator cend() const;
+        const_iterator begin() const;
+        const_iterator end() const;
 
         // Capacity
         bool empty() const;

@@ -1,5 +1,6 @@
 #include <type_traits>
 #include <utility>
+#include <map>
 
 template <typename Iterator, typename = void>
 struct HasFirstAndSecond : std::false_type
@@ -16,6 +17,7 @@ struct HasFirstAndSecond<Iterator,
 
 namespace s21
 {
+
     template <typename T, typename U>
     void AssertContainerEquality(const T &first_container,
                                  const U &second_container)
@@ -23,9 +25,9 @@ namespace s21
         ASSERT_EQ(first_container.empty(), second_container.empty());
         ASSERT_EQ(first_container.size(), second_container.size());
 
-        auto first_iter = first_container.cbegin();
-        typename U::const_iterator second_iter = second_container.cbegin();
-        while (first_iter != first_container.cend())
+        auto first_iter = first_container.begin();
+        typename U::const_iterator second_iter = second_container.begin();
+        while (first_iter != first_container.end())
         {
             if constexpr (HasFirstAndSecond<decltype(first_iter)>::value &&
                           HasFirstAndSecond<decltype(second_iter)>::value)
@@ -41,4 +43,37 @@ namespace s21
             ++second_iter;
         }
     }
+
+    template <typename T>
+    void CompareNodePointers(Node<T> *node_1, Node<T> *node_2)
+    {
+        if (node_1 != node_2)
+        {
+            ASSERT_EQ(*(node_1->key), *(node_2->key));
+            ASSERT_EQ(node_1->color, node_2->color);
+        }
+        else
+            ASSERT_EQ(node_1, node_2);
+    }
+
+    template <typename T, typename U>
+    void AssertTreeEquality(const T &rbt1, U rbt2) // second is std::set<Node>
+    {
+        ASSERT_EQ(rbt1.empty(), rbt2.empty());
+        ASSERT_EQ(rbt1.size(), rbt2.size());
+        auto first_iter = rbt1.cbegin();
+        auto second_iter = rbt2.begin();
+        while (first_iter != rbt1.cend())
+        {
+            ASSERT_EQ(*first_iter, *((*second_iter).key));
+            ASSERT_EQ(first_iter.GetNode().color, (*second_iter).color);
+            CompareNodePointers(first_iter.GetNode().left, (*second_iter).left);
+            CompareNodePointers(first_iter.GetNode().right, (*second_iter).right);
+            CompareNodePointers(first_iter.GetNode().parent, (*second_iter).parent);
+
+            ++first_iter;
+            ++second_iter;
+        }
+    }
+
 }

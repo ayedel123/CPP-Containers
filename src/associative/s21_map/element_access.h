@@ -7,19 +7,16 @@ namespace s21
     template <typename Key, typename T>
     T &map<Key, T>::at(const Key &key)
     {
-        value_type *tmp = nullptr;
-        if (!rbtree_.root)
+        if (empty())
         {
             throw std::out_of_range("out_of_range");
         }
-        else
-        {
-            tmp = rbtree_.RecursiveSearch(nullptr, std::pair<Key, T>(key, rbtree_.root.second))->key;
-        }
-        if (!tmp)
+        auto tmp = rbtree_.Find(MakePhantomPain(key));
+        if (tmp == end())
         {
             throw std::out_of_range("out_of_range");
         }
+
         return tmp->second;
     }
 

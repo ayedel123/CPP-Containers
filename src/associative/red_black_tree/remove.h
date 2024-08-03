@@ -5,9 +5,9 @@ namespace s21
 {
 
     template <typename Key>
-    void RedBlackTree<Key>::Remove(Key key)
+    void RBTree<Key>::Remove(Key key)
     {
-        TreeNode<Key> *tmp = (root != nullptr) ? RecursiveSearch(root, key) : nullptr;
+        Node<Key> *tmp = (root != nullptr) ? RecursiveSearch(root, key) : nullptr;
         bool end = false;
         if (!tmp)
         {
@@ -26,7 +26,7 @@ namespace s21
             {
                 tmp = HandleTwoChildren(tmp);
             }
-            TreeNode<Key> *child = (!tmp->left) ? tmp->left : tmp->right;
+            Node<Key> *child = (!tmp->left) ? tmp->left : tmp->right;
             if (!child)
             {
                 HandleChildFree(tmp);
@@ -40,25 +40,28 @@ namespace s21
     }
 
     template <typename Key>
-    TreeNode<Key> *RedBlackTree<Key>::HandleTwoChildren(TreeNode<Key> *tmp)
+    Node<Key> *RBTree<Key>::HandleTwoChildren(Node<Key> *tmp)
     {
-        TreeNode<Key> *removed = tmp->left;
+        Node<Key> *removed = tmp->left;
         while (removed->right)
         {
             removed = removed->right;
         }
+        // f***k const
+        // AssignKey(tmp, removed->key);
+
         tmp->key = removed->key;
         return removed;
     }
 
     template <typename Key>
-    void RedBlackTree<Key>::HandleChildFree(TreeNode<Key> *tmp)
+    void RBTree<Key>::HandleChildFree(Node<Key> *tmp)
     {
         if (tmp->color == black_node)
         {
             DelCase1(tmp);
         }
-        TreeNode<Key> *p = tmp->parent;
+        Node<Key> *p = tmp->parent;
 
         if (p->left == tmp)
         {
@@ -70,10 +73,10 @@ namespace s21
         }
     }
     template <typename Key>
-    void RedBlackTree<Key>::HanldeIfChild(TreeNode<Key> *tmp, TreeNode<Key> *child)
+    void RBTree<Key>::HanldeIfChild(Node<Key> *tmp, Node<Key> *child)
     {
         child->parent = tmp->parent;
-        TreeNode<Key> *p = tmp->parent;
+        Node<Key> *p = tmp->parent;
 
         if (tmp->parent)
         {
@@ -103,9 +106,9 @@ namespace s21
         }
     }
     template <typename Key>
-    TreeNode<Key> *RedBlackTree<Key>::Sibling(TreeNode<Key> *node)
+    Node<Key> *RBTree<Key>::Sibling(Node<Key> *node)
     {
-        TreeNode<Key> *sibling = nullptr;
+        Node<Key> *sibling = nullptr;
         if (node && node->parent)
         {
             sibling = (node->parent->left == node) ? node->parent->right : node->parent->left;
@@ -113,7 +116,7 @@ namespace s21
         return sibling;
     }
     template <typename Key>
-    void RedBlackTree<Key>::DelCase1(TreeNode<Key> *node)
+    void RBTree<Key>::DelCase1(Node<Key> *node)
     {
         if (node->parent)
         {
@@ -121,10 +124,10 @@ namespace s21
         }
     }
     template <typename Key>
-    void RedBlackTree<Key>::DelCase2(TreeNode<Key> *node)
+    void RBTree<Key>::DelCase2(Node<Key> *node)
     {
-        TreeNode<Key> *s = Sibling(node);
-        TreeNode<Key> *p = node->parent;
+        Node<Key> *s = Sibling(node);
+        Node<Key> *p = node->parent;
         bool scol = s ? s->color : black_node;
 
         if (scol == red_node)
@@ -145,10 +148,10 @@ namespace s21
         DelCase3(node);
     }
     template <typename Key>
-    void RedBlackTree<Key>::DelCase3(TreeNode<Key> *node)
+    void RBTree<Key>::DelCase3(Node<Key> *node)
     {
-        TreeNode<Key> *s = Sibling(node);
-        TreeNode<Key> *p = node->parent;
+        Node<Key> *s = Sibling(node);
+        Node<Key> *p = node->parent;
 
         bool scol = s ? s->color : black_node;
         bool lcol = s && s->left ? s->left->color : black_node;
@@ -168,10 +171,10 @@ namespace s21
         }
     }
     template <typename Key>
-    void RedBlackTree<Key>::DelCase4(TreeNode<Key> *node)
+    void RBTree<Key>::DelCase4(Node<Key> *node)
     {
-        TreeNode<Key> *s = Sibling(node);
-        TreeNode<Key> *p = node->parent;
+        Node<Key> *s = Sibling(node);
+        Node<Key> *p = node->parent;
 
         bool scol = s ? s->color : black_node;
         bool lcol = s && s->left ? s->left->color : black_node;
@@ -191,10 +194,10 @@ namespace s21
         }
     }
     template <typename Key>
-    void RedBlackTree<Key>::DelCase5(TreeNode<Key> *node)
+    void RBTree<Key>::DelCase5(Node<Key> *node)
     {
-        TreeNode<Key> *s = Sibling(node);
-        TreeNode<Key> *p = node->parent;
+        Node<Key> *s = Sibling(node);
+        Node<Key> *p = node->parent;
 
         bool lcol = s->left ? s->left->color : black_node;
         bool rcol = s->right ? s->right->color : black_node;
@@ -218,10 +221,10 @@ namespace s21
         DelCase6(node);
     }
     template <typename Key>
-    void RedBlackTree<Key>::DelCase6(TreeNode<Key> *node)
+    void RBTree<Key>::DelCase6(Node<Key> *node)
     {
-        TreeNode<Key> *s = Sibling(node);
-        TreeNode<Key> *p = node->parent;
+        Node<Key> *s = Sibling(node);
+        Node<Key> *p = node->parent;
         s->color = p->color;
         p->color = black_node;
 
@@ -242,7 +245,6 @@ namespace s21
             RotateRight(p);
         }
     }
-
 }
 
 #endif

@@ -40,7 +40,8 @@ int main()
     {
         std::cout << *it << " ";
     }
-    std::cout << std::endl;
+    std::cout << std::endl
+              << s21_set1.size();
 
     return 0;
 }

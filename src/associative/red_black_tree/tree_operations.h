@@ -5,40 +5,40 @@ namespace s21
 {
 
     template <typename Key>
-    typename RedBlackTree<Key>::iterator RedBlackTree<Key>::Find(const Key &key)
+    typename RBTree<Key>::iterator RBTree<Key>::Find(const Key &key)
     {
-        TreeNode<Key> *tmp = RecursiveSearch(root, key);
+        Node<Key> *tmp = RecursiveSearch(root, key);
 
         return (tmp)
-                   ? RedBlackTree<Key>::iterator(tmp, this)
+                   ? RBTree<Key>::iterator(tmp, this)
                    : end();
     }
 
     template <typename Key>
-    TreeNode<Key> *RedBlackTree<Key>::RecursiveSearch(TreeNode<Key> *parent, Key key)
+    Node<Key> *RBTree<Key>::RecursiveSearch(Node<Key> *parent, Key key)
     {
-        TreeNode<Key> *result = nullptr;
-        if (parent == nullptr || Equal(parent->key, key))
+        Node<Key> *result = nullptr;
+        if (parent == nullptr || Equal(*(parent->key), key))
         {
             result = parent;
         }
         else
         {
-            result = (Less(key, parent->key)) ? RecursiveSearch(parent->left, key) : RecursiveSearch(parent->right, key);
+            result = (Less(key, *(parent->key))) ? RecursiveSearch(parent->left, key) : RecursiveSearch(parent->right, key);
         }
 
         return result;
     }
 
     template <typename Key>
-    void RedBlackTree<Key>::RotateLeft(TreeNode<Key> *node)
+    void RBTree<Key>::RotateLeft(Node<Key> *node)
     {
-        TreeNode<Key> *right = node->right;
+        Node<Key> *right = node->right;
 
         right->parent = node->parent;
         if (node->parent)
         {
-            TreeNode<Key> *p = node->parent;
+            Node<Key> *p = node->parent;
 
             if (p->left == node)
             {
@@ -64,14 +64,14 @@ namespace s21
         right->left = node;
     }
     template <typename Key>
-    void RedBlackTree<Key>::RotateRight(TreeNode<Key> *node)
+    void RBTree<Key>::RotateRight(Node<Key> *node)
     {
-        TreeNode<Key> *left = node->left;
+        Node<Key> *left = node->left;
 
         left->parent = node->parent;
         if (node->parent)
         {
-            TreeNode<Key> *p = node->parent;
+            Node<Key> *p = node->parent;
 
             if (p->left == node)
             {
@@ -97,9 +97,9 @@ namespace s21
         left->right = node;
     }
     template <typename Key>
-    TreeNode<Key> *RedBlackTree<Key>::GetGrandpa(TreeNode<Key> *node)
+    Node<Key> *RBTree<Key>::GetGrandpa(Node<Key> *node)
     {
-        TreeNode<Key> *p = node->parent;
+        Node<Key> *p = node->parent;
         if (p != nullptr && p->parent != nullptr)
         {
             return p->parent;
@@ -110,9 +110,9 @@ namespace s21
         }
     }
     template <typename Key>
-    TreeNode<Key> *RedBlackTree<Key>::GetUncle(TreeNode<Key> *node)
+    Node<Key> *RBTree<Key>::GetUncle(Node<Key> *node)
     {
-        TreeNode<Key> *tmp = GetGrandpa(node);
+        Node<Key> *tmp = GetGrandpa(node);
 
         if (tmp != nullptr)
         {
@@ -132,7 +132,7 @@ namespace s21
     }
 
     template <typename Key>
-    RedBlackTree<Key>::RedBlackTree(const RedBlackTree &other)
+    RBTree<Key>::RBTree(const RBTree &other)
     {
         for (auto it = other.cbegin(); it != other.cend(); ++it)
         {
@@ -141,7 +141,7 @@ namespace s21
     }
 
     template <typename Key>
-    RedBlackTree<Key> &RedBlackTree<Key>::operator=(const RedBlackTree &other)
+    RBTree<Key> &RBTree<Key>::operator=(const RBTree &other)
     {
         if (this != &other)
         {
@@ -155,7 +155,7 @@ namespace s21
     }
 
     template <typename Key>
-    RedBlackTree<Key> &RedBlackTree<Key>::operator=(RedBlackTree &&other)
+    RBTree<Key> &RBTree<Key>::operator=(RBTree &&other)
     {
         if (this != &other)
         {
@@ -168,7 +168,7 @@ namespace s21
     }
 
     template <typename Key>
-    RedBlackTree<Key>::RedBlackTree(RedBlackTree<Key> &&other) noexcept
+    RBTree<Key>::RBTree(RBTree<Key> &&other) noexcept
     {
         Clear();
         root = other.root;
@@ -178,7 +178,7 @@ namespace s21
     }
 
     template <typename Key>
-    void RedBlackTree<Key>::swap(RedBlackTree<Key> &first, RedBlackTree<Key> &second) noexcept
+    void RBTree<Key>::swap(RBTree<Key> &first, RBTree<Key> &second) noexcept
     {
         using std::swap;
         swap(first.root, second.root);

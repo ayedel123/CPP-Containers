@@ -5,13 +5,13 @@ namespace s21
 {
 
     template <typename Key>
-    RedBlackTree<Key>::~RedBlackTree()
+    RBTree<Key>::~RBTree()
     {
         Clear();
     }
 
     template <typename Key>
-    void RedBlackTree<Key>::Clear()
+    void RBTree<Key>::Clear()
     {
         LRNdelete(root);
         root = nullptr;
@@ -19,13 +19,13 @@ namespace s21
     }
 
     template <typename Key>
-    void RedBlackTree<Key>::LRNdelete(TreeNode<Key> *tmp)
+    void RBTree<Key>::LRNdelete(Node<Key> *tmp)
     {
         if (tmp != nullptr)
         {
             LRNdelete(tmp->left);
             LRNdelete(tmp->right);
-            delete tmp;
+            DeleteNode(tmp);
             tmp = nullptr;
         }
     }

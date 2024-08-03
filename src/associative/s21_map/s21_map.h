@@ -8,18 +8,19 @@ namespace s21
     template <typename Key, typename T>
     class map
     {
+    public:
         using key_type = Key;
         using mapped_type = T;
         using value_type = std::pair<const key_type, mapped_type>;
-        using size_type = typename RedBlackTree<key_type>::size_type;
-        using iterator = typename RedBlackTree<value_type>::iterator;
+        using size_type = typename RBTree<key_type>::size_type;
+        using iterator = typename RBTree<value_type>::iterator;
 
-        using reference = typename RedBlackTree<value_type>::reference;
-        using const_reference = typename RedBlackTree<value_type>::const_reference;
-        using const_iterator = typename RedBlackTree<value_type>::const_iterator;
+        using reference = typename RBTree<value_type>::reference;
+        using const_reference = typename RBTree<value_type>::const_reference;
+        using const_iterator = typename RBTree<value_type>::const_iterator;
 
     private:
-        RedBlackTree<value_type> rbtree_;
+        RBTree<std::pair<const key_type, mapped_type>> rbtree_;
 
     public:
         // key_type &reference;
@@ -33,6 +34,7 @@ namespace s21
         ~map() = default;
 
         map<Key, T> operator=(map &&s);
+        map<Key, T> &operator=(const map &s);
 
         // Element access
         T &at(const Key &key);
@@ -40,9 +42,9 @@ namespace s21
 
         // Iterators
         iterator begin();
-        const_iterator cbegin() const;
+        const_iterator begin() const;
         iterator end();
-        const_iterator cend() const;
+        const_iterator end() const;
 
         // Capacity
         bool empty() const;
@@ -61,20 +63,28 @@ namespace s21
         void merge(map &other);
 
         // Lookup
-        iterator find(const key_type &key);
+        // iterator find(const key_type &key);
         bool contains(const key_type &key);
 
         // Secret
 
     private:
+        value_type MakePhantomPain(Key key)
+        {
+            value_type phantom = std::make_pair(key, (*begin()).second);
+            return phantom;
+        }
+
         static bool PairLess(const value_type &v1, const value_type &v2)
         {
+            // std::cout << v1.first << " < " << v2.first << " = " << (v1.first < v2.first) << std::endl;
             return v1.first < v2.first;
         }
 
         static bool PairEqual(const value_type &v1, const value_type &v2)
         {
-            return v1.first == v2.first;
+            // std::cout << v1.first << v2.first << (v1.first == v2.first) << std::endl;
+            return v1.first == v2.first ? true : false;
         }
     };
 }

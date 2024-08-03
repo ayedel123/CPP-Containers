@@ -17,13 +17,13 @@ namespace s21
     }
 
     template <typename Key, typename T>
-    typename map<Key, T>::const_iterator map<Key, T>::cbegin() const
+    typename map<Key, T>::const_iterator map<Key, T>::begin() const
     {
         return rbtree_.cbegin();
     }
 
     template <typename Key, typename T>
-    typename map<Key, T>::const_iterator map<Key, T>::cend() const
+    typename map<Key, T>::const_iterator map<Key, T>::end() const
     {
         return rbtree_.cend();
     }

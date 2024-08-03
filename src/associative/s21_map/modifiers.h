@@ -27,12 +27,15 @@ namespace s21
     template <typename Key, typename T>
     std::pair<typename map<Key, T>::iterator, bool> map<Key, T>::insert_or_assign(const Key &key, const T &obj)
     {
-        auto pair = std::make_pair(key, obj);
+        // std::cout << "insert_or_assign\n";
+        value_type pair = std::make_pair(key, obj);
         std::pair<typename map<Key, T>::iterator, bool> tmp = rbtree_.InsertNode(pair);
-        if (!*(tmp.second))
+        if (!tmp.second)
         {
-            tmp.second->key = pair;
+            // std::cout << "Snus2";
+            (*tmp.first).second = obj;
         }
+        return tmp;
     }
 
     template <typename Key, typename T>
@@ -44,15 +47,19 @@ namespace s21
     template <typename Key, typename T>
     void map<Key, T>::swap(map &other)
     {
-        std::swap(rbtree_, other.tree_);
+        if (this != &other)
+        {
+            rbtree_.swap(rbtree_, other.rbtree_);
+        }
     }
 
     template <typename Key, typename T>
     void map<Key, T>::merge(map &other)
     {
-        for (auto it = other.begin(); it != other.end(); it++)
+        for (auto it = other.begin(); it != other.end(); ++it)
         {
-            rbtree_.InsertNode(*it);
+            if ((insert(*it)).second)
+                other.erase(it);
         }
     }
 

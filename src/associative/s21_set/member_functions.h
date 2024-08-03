@@ -7,7 +7,7 @@ namespace s21
     template <typename Key>
     set<Key>::set(const set &s) : set()
     {
-        for (auto it = s.cbegin(); it != s.cend(); ++it)
+        for (auto it = s.begin(); it != s.end(); ++it)
         {
             insert(*it);
         }
@@ -39,9 +39,9 @@ namespace s21
     set<Key> &set<Key>::operator=(const set &s)
     {
         clear();
-        this->rbtree_ = RedBlackTree<Key>();
-        auto iter = s.cbegin();
-        while (iter != s.cend())
+        this->rbtree_ = RBTree<Key>();
+        auto iter = s.begin();
+        while (iter != s.end())
         {
 
             insert(*iter);

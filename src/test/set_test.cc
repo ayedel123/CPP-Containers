@@ -93,7 +93,8 @@ TEST_F(SetTestCase, case_9)
     auto p1 = s21_set.insert(1);
     auto p2 = s21_set.insert(4);
     ASSERT_EQ(p1.second, false);
-    ASSERT_EQ(p1.first == s21_set.end(), true);
+    ASSERT_EQ(p1.first == s21_set.find(1), true);
+    ASSERT_EQ(*(p1.first), 1);
     ASSERT_EQ(p2.second, true);
     ASSERT_EQ(*(p2.first), 4);
 }

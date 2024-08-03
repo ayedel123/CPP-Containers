@@ -12,25 +12,28 @@ namespace s21
     {
 
         black_node,
-        red_node,
-        nil_node
+        red_node
     };
 
     template <typename Key>
-    struct TreeNode
+    struct Node
     {
-        Key key;
-        TreeNode<Key> *left = nullptr;
-        TreeNode<Key> *right = nullptr;
-        TreeNode<Key> *parent = nullptr;
+        Key *key;
+        Node<Key> *left = nullptr;
+        Node<Key> *right = nullptr;
+        Node<Key> *parent = nullptr;
         bool color = black_node;
+        bool operator<(const Node<Key> &other) const
+        {
+            return *key < *other.key;
+        }
     };
 
     template <typename Key>
-    class RedBlackTree
+    class RBTree
     {
 
-    private:
+    public:
         class Iterator;
         class ConstIterator;
 
@@ -47,111 +50,112 @@ namespace s21
 
         size_type size_ = 0;
 
-    private:
+        Node<Key> *root = nullptr;
+
+    public:
         bool (*Less)(const Key &v1, const Key &v2) = nullptr;
         bool (*Equal)(const Key &v1, const Key &v2) = nullptr;
 
     public:
-        RedBlackTree() : Less([](const Key &v1, const Key &v2)
-                              { return v1 < v2; }),
-                         Equal([](const Key &v1, const Key &v2)
-                               { return v1 == v2; }) {}
-        RedBlackTree(bool (*lessFn)(const Key &, const Key &), bool (*equalFn)(const Key &, const Key &))
+        RBTree() : Less([](const Key &v1, const Key &v2)
+                        { return v1 < v2; }),
+                   Equal([](const Key &v1, const Key &v2)
+                         { return v1 == v2; }) {}
+        RBTree(bool (*lessFn)(const Key &, const Key &), bool (*equalFn)(const Key &, const Key &))
             : Less(lessFn), Equal(equalFn) {}
 
-        RedBlackTree(const RedBlackTree &other);
-        RedBlackTree(RedBlackTree<Key> &&other) noexcept;
+        RBTree(const RBTree &other);
+        RBTree(RBTree<Key> &&other) noexcept;
 
-        void swap(RedBlackTree<Key> &first, RedBlackTree<Key> &second) noexcept;
+        ~RBTree();
 
-        RedBlackTree<Key> &operator=(const RedBlackTree &other);
-        RedBlackTree<Key> &operator=(RedBlackTree &&other);
+        RBTree<Key> &operator=(const RBTree &other);
+        RBTree<Key> &operator=(RBTree &&other);
 
-        TreeNode<Key> *root = nullptr;
-
-        TreeNode<Key> *RecursiveSearch(TreeNode<Key> *parent, Key key);
-        iterator Find(const Key &key);
-
-        void RotateLeft(TreeNode<Key> *node);
-        void RotateRight(TreeNode<Key> *node);
-        void SwapColors();
-
-        TreeNode<Key> *GetGrandpa(TreeNode<Key> *node);
-        TreeNode<Key> *GetUncle(TreeNode<Key> *node);
-
-        size_type size() const
-        {
-            return size_;
-        }
-
-        bool empty() const
-        {
-            return (size() == 0) ? true : false;
-        }
-
-        size_type max_size() const
-        {
-            return std::numeric_limits<difference_type>::max() /
-                   sizeof(TreeNode<Key>);
-        }
-
-        // void Sort(TreeNode<Key> *tmp);
-
-        void Assign(iterator *iter, Key value);
-
-        std::pair<RedBlackTree<Key>::iterator, bool> InsertRecursive(TreeNode<Key> *parent, TreeNode<Key> *child);
-        std::pair<RedBlackTree<Key>::iterator, bool> InsertNode(const Key key);
-        void InsCase1(TreeNode<Key> *node);
-        void InsCase2(TreeNode<Key> *node);
-        void InsCase3(TreeNode<Key> *node);
-        void InsCase4(TreeNode<Key> *node);
-        void InsCase5(TreeNode<Key> *node);
-
-        void Remove(Key key);
-        void DelCase1(TreeNode<Key> *node);
-        void DelCase2(TreeNode<Key> *node);
-        void DelCase3(TreeNode<Key> *node);
-        void DelCase4(TreeNode<Key> *node);
-        void DelCase5(TreeNode<Key> *node);
-        void DelCase6(TreeNode<Key> *node);
-
-        // probably just friend functions
-        TreeNode<Key> *HandleTwoChildren(TreeNode<Key> *tmp);
-        void HandleChildFree(TreeNode<Key> *tmp);
-        void HanldeIfChild(TreeNode<Key> *tmp, TreeNode<Key> *child);
-        TreeNode<Key> *Sibling(TreeNode<Key> *node);
-
-        // Walkfer functions
-        TreeNode<Key> *GetMin(TreeNode<Key> *tmp) const;
-        TreeNode<Key> *GetMax(TreeNode<Key> *tmp) const;
-        TreeNode<Key> *Next(TreeNode<Key> *tmp);
-        TreeNode<Key> *Previous(TreeNode<Key> *tmp);
-
-        void Clear();
-        void LRNdelete(TreeNode<Key> *tmp);
-
-        ~RedBlackTree();
-
-        iterator begin();
-        iterator end();
-        ConstIterator cbegin() const;
-        ConstIterator cend() const;
-
+        // Set compair functions for Ket type
         void SetComparisonFunctions(bool (*lessFn)(const Key &v1, const Key &v2), bool (*equalFn)(const Key &v1, const Key &v2))
         {
             Less = lessFn;
             Equal = equalFn;
         }
 
+        // Swap idk
+        void swap(RBTree<Key> &first, RBTree<Key> &second) noexcept;
+
+        // Search functions
+        Node<Key> *RecursiveSearch(Node<Key> *parent, Key key);
+        iterator Find(const Key &key);
+
+        // Capacity
+        size_type size() const;
+        bool empty() const;
+        size_type max_size() const;
+
+        // Assign
+        void Assign(iterator *iter, Key value);
+
+        // Insert
+        std::pair<RBTree<Key>::iterator, bool> InsertRecursive(Node<Key> *parent, Node<Key> *child);
+        std::pair<RBTree<Key>::iterator, bool> InsertNode(const Key key);
+        void InsCase1(Node<Key> *node);
+        void InsCase2(Node<Key> *node);
+        void InsCase3(Node<Key> *node);
+        void InsCase4(Node<Key> *node);
+        void InsCase5(Node<Key> *node);
+
+        // Remove
+        void Remove(Key key);
+        void DelCase1(Node<Key> *node);
+        void DelCase2(Node<Key> *node);
+        void DelCase3(Node<Key> *node);
+        void DelCase4(Node<Key> *node);
+        void DelCase5(Node<Key> *node);
+        void DelCase6(Node<Key> *node);
+
+        // Clear
+        void Clear();
+
+        // Remove Helpers
+        Node<Key> *HandleTwoChildren(Node<Key> *tmp);
+        void HandleChildFree(Node<Key> *tmp);
+        void HanldeIfChild(Node<Key> *tmp, Node<Key> *child);
+        void DeleteNode(Node<Key> *node)
+        {
+            delete (node->key);
+            delete (node);
+        }
+
+        void LRNdelete(Node<Key> *tmp);
+
+        // Iterators
+        iterator begin();
+        iterator end();
+        ConstIterator cbegin() const;
+        ConstIterator cend() const;
+
+        // Iterator walkers
+        Node<Key> *GetMin(Node<Key> *tmp) const;
+        Node<Key> *GetMax(Node<Key> *tmp) const;
+        Node<Key> *Next(Node<Key> *tmp);
+        Node<Key> *Previous(Node<Key> *tmp);
+
+        // Helpers
+        void RotateLeft(Node<Key> *node);
+        void RotateRight(Node<Key> *node);
+
+        Node<Key> *GetGrandpa(Node<Key> *node);
+        Node<Key> *GetUncle(Node<Key> *node);
+        Node<Key> *Sibling(Node<Key> *node);
+
         void
-        PrintTree(TreeNode<Key> *root)
+        PrintTree(Node<Key> *root)
         {
             if (root == nullptr)
             {
                 return;
             }
 
-            std::queue<TreeNode<Key> *> q;
+            std::queue<Node<Key> *> q;
             q.push(root);
 
             while (!q.empty())
@@ -160,7 +164,7 @@ namespace s21
 
                 while (nodeCount > 0)
                 {
-                    TreeNode<Key> *node = q.front();
+                    Node<Key> *node = q.front();
                     q.pop();
                     if (node)
                     {
@@ -198,5 +202,6 @@ namespace s21
 #include "tree_walker.h"
 #include "destructor.h"
 #include "iterator.h"
+#include "capacity.h"
 
 #endif
