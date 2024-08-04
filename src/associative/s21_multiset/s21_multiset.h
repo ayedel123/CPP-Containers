@@ -1,12 +1,12 @@
-#ifndef CPP2_S21_CONTAINERS_1_ASSOCIATIVE_S21_SET_S21_SET_H_
-#define CPP2_S21_CONTAINERS_1_ASSOCIATIVE_S21_SET_S21_SET_H_
+#ifndef CPP2_S21_CONTAINERS_1_ASSOCIATIVE_S21_MULTISET_S21_SET_H_
+#define CPP2_S21_CONTAINERS_1_ASSOCIATIVE_S21_MULTISET_S21_SET_H_
 
 #include "../red_black_tree/red_black_tree.h"
 
 namespace s21
 {
     template <typename Key>
-    class set
+    class multiset
     {
     public:
         using key_type = Key;
@@ -22,14 +22,14 @@ namespace s21
         // const Key &const_reference;
 
         // Member functions
-        set() = default;
-        set(std::initializer_list<Key> const &items);
-        set(const set &s);
-        set(set &&s);
-        ~set() = default;
+        multiset();
+        multiset(std::initializer_list<Key> const &items);
+        multiset(const multiset &s);
+        multiset(multiset &&s);
+        ~multiset() = default;
 
-        set<Key> operator=(set &&s);
-        set<Key> &operator=(const set &s);
+        multiset<Key> operator=(multiset &&s);
+        multiset<Key> &operator=(const multiset &s);
 
         // Iterators
         iterator begin();
@@ -46,16 +46,18 @@ namespace s21
         void clear();
         std::pair<iterator, bool> insert(const Key &value);
         void erase(iterator pos);
-        void swap(set &other);
-        void merge(set &other);
+        void swap(multiset &other);
+        void merge(multiset &other);
 
         // Lookup
         iterator find(const Key &key);
         bool contains(const Key &key);
+        std::pair<iterator, iterator> equal_range(const Key &key);
+        iterator lower_bound(const Key &key);
+        iterator upper_bound(const Key &key);
 
     private:
         RBTree<Key> rbtree_;
-
     };
 
 }

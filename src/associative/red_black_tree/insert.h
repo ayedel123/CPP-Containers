@@ -16,10 +16,12 @@ namespace s21
     template <typename Key>
     std::pair<typename RBTree<Key>::iterator, bool> RBTree<Key>::InsertRecursive(Node<Key> *parent, Node<Key> *child)
     {
+
         Node<Key> **tmp = (Less(*(child->key), *(parent->key))) ? &parent->left : &parent->right;
+
         std::pair<iterator, bool> result{End(), false};
 
-        if (Equal(*(parent->key), *(child->key)))
+        if (!allow_equal_ && Equal(*(parent->key), *(child->key)))
         {
 
             result = std::pair<iterator, bool>{RBTree<Key>::iterator(parent, this), false};

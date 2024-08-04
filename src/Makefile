@@ -17,7 +17,8 @@ endif
 TEST_SOURCES = ./test/containers_test.cc \
 			 ./test/map_test.cc \
 			 ./test/set_test.cc \
-			 ./test/rbtree_test.cc
+			 ./test/rbtree_test.cc \
+			 ./test/multiset_test.cc
 
 test: clean
 	$(GPP) $(CFLAGS)  $(TEST_SOURCES)  $(TESTFLAGS) -o test.out

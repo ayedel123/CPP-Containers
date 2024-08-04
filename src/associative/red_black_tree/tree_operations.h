@@ -132,17 +132,25 @@ namespace s21
     }
 
     template <typename Key>
+    RBTree<Key>::RBTree(bool allow_equal) : RBTree()
+    {
+        allow_equal_ = allow_equal;
+    }
+
+    template <typename Key>
     RBTree<Key>::RBTree(const RBTree &other)
     {
         for (auto it = other.cBegin(); it != other.cEnd(); ++it)
         {
             InsertNode(*it);
         }
+        allow_equal_ = other.allow_equal_;
     }
 
     template <typename Key>
     RBTree<Key> &RBTree<Key>::operator=(const RBTree &other)
     {
+
         if (this != &other)
         {
             Clear();
@@ -150,6 +158,7 @@ namespace s21
             {
                 InsertNode(*it);
             }
+            allow_equal_ = other.allow_equal_;
         }
         return *this;
     }
@@ -163,6 +172,7 @@ namespace s21
             root = other.root;
             size_ = other.size_;
             other.size_ = 0;
+            allow_equal_ = other.allow_equal_;
         }
         return *this;
     }
@@ -175,6 +185,7 @@ namespace s21
         size_ = other.size_;
         other.root = nullptr;
         other.size_ = 0;
+        allow_equal_ = other.allow_equal_;
     }
 
     template <typename Key>

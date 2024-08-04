@@ -26,7 +26,7 @@ namespace s21
 
         ~Node()
         {
-                delete key;
+            delete key;
         }
         bool operator<(const Node<Key> &other) const
         {
@@ -69,8 +69,11 @@ namespace s21
         RBTree(bool (*lessFn)(const Key &, const Key &), bool (*equalFn)(const Key &, const Key &))
             : Less(lessFn), Equal(equalFn) {}
 
+        RBTree(bool allow_equal);
+
         RBTree(const RBTree &other);
         RBTree(RBTree<Key> &&other) noexcept;
+
 
         ~RBTree();
 
@@ -194,6 +197,9 @@ namespace s21
                 std::cout << std::endl;
             }
         }
+
+    private:
+        bool allow_equal_ = false;
     };
 }
 #include "tree_operations.h"
