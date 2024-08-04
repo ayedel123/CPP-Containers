@@ -1,5 +1,5 @@
-#ifndef __S21_MAP__
-#define __S21_MAP__
+#ifndef CPP2_S21_CONTAINERS_1_ASSOCIATIVE_S21_MAP_S21_MAP_H_
+#define CPP2_S21_CONTAINERS_1_ASSOCIATIVE_S21_MAP_S21_MAP_H_
 
 #include "../red_black_tree/red_black_tree.h"
 
@@ -18,9 +18,6 @@ namespace s21
         using reference = typename RBTree<value_type>::reference;
         using const_reference = typename RBTree<value_type>::const_reference;
         using const_iterator = typename RBTree<value_type>::const_iterator;
-
-    private:
-        RBTree<std::pair<const key_type, mapped_type>> rbtree_;
 
     public:
         // key_type &reference;
@@ -65,6 +62,9 @@ namespace s21
         // Lookup
         // iterator find(const key_type &key);
         bool contains(const key_type &key);
+
+    private:
+        RBTree<std::pair<const key_type, mapped_type>> rbtree_;
 
         // Secret
 

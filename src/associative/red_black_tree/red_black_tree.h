@@ -1,5 +1,5 @@
-#ifndef __RED_BLACK_TREE__
-#define __RED_BLACK_TREE__
+#ifndef CPP2_S21_CONTAINERS_1_ASSOCIATIVE_RED_BLACK_TREE_RED_BLACK_TREE_H
+#define CPP2_S21_CONTAINERS_1_ASSOCIATIVE_RED_BLACK_TREE_RED_BLACK_TREE_H
 
 #include <iostream>
 #include <queue>
@@ -85,23 +85,23 @@ namespace s21
         }
 
         // Swap idk
-        void swap(RBTree<Key> &first, RBTree<Key> &second) noexcept;
+        void Swap(RBTree<Key> &first, RBTree<Key> &second) noexcept;
 
         // Search functions
         Node<Key> *RecursiveSearch(Node<Key> *parent, Key key);
         iterator Find(const Key &key);
 
         // Capacity
-        size_type size() const;
-        bool empty() const;
-        size_type max_size() const;
+        size_type Size() const;
+        bool Empty() const;
+        size_type MaxSize() const;
 
         // Assign
         void Assign(iterator *iter, Key value);
 
         // Insert
         std::pair<RBTree<Key>::iterator, bool> InsertRecursive(Node<Key> *parent, Node<Key> *child);
-        std::pair<RBTree<Key>::iterator, bool> InsertNode(const Key key);
+        std::pair<RBTree<Key>::iterator, bool> Insert(const Key key);
         void InsCase1(Node<Key> *node);
         void InsCase2(Node<Key> *node);
         void InsCase3(Node<Key> *node);
@@ -128,10 +128,10 @@ namespace s21
         void LRNdelete(Node<Key> *tmp);
 
         // Iterators
-        iterator begin();
-        iterator end();
-        ConstIterator cbegin() const;
-        ConstIterator cend() const;
+        iterator Begin();
+        iterator End();
+        ConstIterator cBegin() const;
+        ConstIterator cEnd() const;
 
         // Iterator walkers
         Node<Key> *GetMin(Node<Key> *tmp) const;

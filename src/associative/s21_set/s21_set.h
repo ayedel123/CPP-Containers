@@ -1,5 +1,6 @@
-#ifndef __S21_SET__
-#define __S21_SET__
+#ifndef CPP2_S21_CONTAINERS_1_ASSOCIATIVE_S21_SET_S21_SET_H_
+#define CPP2_S21_CONTAINERS_1_ASSOCIATIVE_S21_SET_S21_SET_H_
+
 #include "../red_black_tree/red_black_tree.h"
 
 namespace s21
@@ -15,9 +16,6 @@ namespace s21
         using reference = typename RBTree<key_type>::reference;
         using const_reference = typename RBTree<key_type>::const_reference;
         using const_iterator = typename RBTree<Key>::const_iterator;
-
-    private:
-        RBTree<Key> rbtree_;
 
     public:
         // Key &reference;
@@ -54,7 +52,11 @@ namespace s21
         // Lookup
         iterator find(const Key &key);
         bool contains(const Key &key);
+
+    private:
+        RBTree<Key> rbtree_;
     };
+
 }
 
 #include "member_functions.h"

@@ -1,5 +1,5 @@
-#ifndef __RED_BLACK_TREE_INSERT__
-#define __RED_BLACK_TREE_INSERT__
+#ifndef CPP2_S21_CONTAINERS_1_ASSOCIATIVE_RED_BLACK_TREE_INSERT_H
+#define CPP2_S21_CONTAINERS_1_ASSOCIATIVE_RED_BLACK_TREE_INSERT_H
 
 namespace s21
 {
@@ -17,7 +17,7 @@ namespace s21
     std::pair<typename RBTree<Key>::iterator, bool> RBTree<Key>::InsertRecursive(Node<Key> *parent, Node<Key> *child)
     {
         Node<Key> **tmp = (Less(*(child->key), *(parent->key))) ? &parent->left : &parent->right;
-        std::pair<iterator, bool> result{end(), false};
+        std::pair<iterator, bool> result{End(), false};
 
         if (Equal(*(parent->key), *(child->key)))
         {
@@ -42,11 +42,11 @@ namespace s21
     }
 
     template <typename Key>
-    std::pair<typename RBTree<Key>::iterator, bool> RBTree<Key>::InsertNode(const Key key)
+    std::pair<typename RBTree<Key>::iterator, bool> RBTree<Key>::Insert(const Key key)
     {
 
         Node<Key> *new_node = new Node<Key>{new Key{key}, nullptr, nullptr, nullptr, red_node};
-        std::pair<iterator, bool> result{end(), false};
+        std::pair<iterator, bool> result{End(), false};
 
         if (root == nullptr)
         {
@@ -96,14 +96,14 @@ namespace s21
     template <typename Key>
     void RBTree<Key>::InsCase3(Node<Key> *node)
     {
-        Node<Key> *u = GetUncle(node);
-        if (u != nullptr && u->color == red_node)
+        Node<Key> *uncle = GetUncle(node);
+        if (uncle != nullptr && uncle->color == red_node)
         {
             node->parent->color = black_node;
-            u->color = black_node;
-            Node<Key> *g = GetGrandpa(node);
-            g->color = red_node;
-            InsCase1(g);
+            uncle->color = black_node;
+            Node<Key> *grandpa = GetGrandpa(node);
+            grandpa->color = red_node;
+            InsCase1(grandpa);
         }
         else
         {
@@ -114,18 +114,18 @@ namespace s21
     template <typename Key>
     void RBTree<Key>::InsCase4(Node<Key> *node)
     {
-        Node<Key> *g = GetGrandpa(node);
+        Node<Key> *grandpa = GetGrandpa(node);
         Node<Key> *tmp = node;
-        Node<Key> *p = node->parent;
+        Node<Key> *parent = node->parent;
 
-        if (node == p->right && p == g->left)
+        if (node == parent->right && parent == grandpa->left)
         {
-            RotateLeft(p);
+            RotateLeft(parent);
             tmp = node->left;
         }
-        else if (node == p->left && p == g->right)
+        else if (node == parent->left && parent == grandpa->right)
         {
-            RotateRight(p);
+            RotateRight(parent);
             tmp = node->right;
         }
 
@@ -135,18 +135,18 @@ namespace s21
     template <typename Key>
     void RBTree<Key>::InsCase5(Node<Key> *node)
     {
-        Node<Key> *g = GetGrandpa(node);
-        Node<Key> *p = node->parent;
-        p->color = black_node;
-        g->color = red_node;
+        Node<Key> *grandpa = GetGrandpa(node);
+        Node<Key> *parent = node->parent;
+        parent->color = black_node;
+        grandpa->color = red_node;
 
-        if (node == p->left)
+        if (node == parent->left)
         {
-            RotateRight(g);
+            RotateRight(grandpa);
         }
         else
         {
-            RotateLeft(g);
+            RotateLeft(grandpa);
         }
     }
 }

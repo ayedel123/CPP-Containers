@@ -1,5 +1,5 @@
-#ifndef __RED_BLACK_TREE_ITERATOR__
-#define __RED_BLACK_TREE_ITERATOR__
+#ifndef CPP2_S21_CONTAINERS_1_ASSOCIATIVE_RED_BLACK_TREE_ITERATOR_H
+#define CPP2_S21_CONTAINERS_1_ASSOCIATIVE_RED_BLACK_TREE_ITERATOR_H
 
 namespace s21
 {
@@ -145,25 +145,25 @@ namespace s21
     };
 
     template <typename Key>
-    typename RBTree<Key>::Iterator RBTree<Key>::begin()
+    typename RBTree<Key>::Iterator RBTree<Key>::Begin()
     {
         return typename RBTree<Key>::Iterator(GetMin(root), this);
     }
 
     template <typename Key>
-    typename RBTree<Key>::Iterator RBTree<Key>::end()
+    typename RBTree<Key>::Iterator RBTree<Key>::End()
     {
         return typename RBTree<Key>::Iterator(nullptr, this);
     }
 
     template <typename Key>
-    typename RBTree<Key>::ConstIterator RBTree<Key>::cbegin() const
+    typename RBTree<Key>::ConstIterator RBTree<Key>::cBegin() const
     {
         return typename RBTree<Key>::ConstIterator(GetMin(root), const_cast<RBTree<Key> *>(this));
     }
 
     template <typename Key>
-    typename RBTree<Key>::ConstIterator RBTree<Key>::cend() const
+    typename RBTree<Key>::ConstIterator RBTree<Key>::cEnd() const
     {
         return typename RBTree<Key>::ConstIterator(nullptr, const_cast<RBTree<Key> *>(this));
     }

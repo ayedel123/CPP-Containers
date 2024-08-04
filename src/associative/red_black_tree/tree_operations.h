@@ -1,5 +1,5 @@
-#ifndef __RED_BLACK_TREE_OPERATIONS
-#define __RED_BLACK_TREE_OPERATIONS
+#ifndef CPP2_S21_CONTAINERS_1_ASSOCIATIVE_RED_BLACK_TREE_OPERATIONS_H
+#define CPP2_S21_CONTAINERS_1_ASSOCIATIVE_RED_BLACK_TREE_OPERATIONS_H
 
 namespace s21
 {
@@ -11,7 +11,7 @@ namespace s21
 
         return (tmp)
                    ? RBTree<Key>::iterator(tmp, this)
-                   : end();
+                   : End();
     }
 
     template <typename Key>
@@ -134,7 +134,7 @@ namespace s21
     template <typename Key>
     RBTree<Key>::RBTree(const RBTree &other)
     {
-        for (auto it = other.cbegin(); it != other.cend(); ++it)
+        for (auto it = other.cBegin(); it != other.cEnd(); ++it)
         {
             InsertNode(*it);
         }
@@ -146,7 +146,7 @@ namespace s21
         if (this != &other)
         {
             Clear();
-            for (auto it = other.cbegin(); it != other.cend(); ++it)
+            for (auto it = other.cBegin(); it != other.cEnd(); ++it)
             {
                 InsertNode(*it);
             }
@@ -178,11 +178,10 @@ namespace s21
     }
 
     template <typename Key>
-    void RBTree<Key>::swap(RBTree<Key> &first, RBTree<Key> &second) noexcept
+    void RBTree<Key>::Swap(RBTree<Key> &first, RBTree<Key> &second) noexcept
     {
-        using std::swap;
-        swap(first.root, second.root);
-        swap(first.size_, second.size_);
+        std::swap(first.root, second.root);
+        std::swap(first.size_, second.size_);
     }
 
 }

@@ -1,5 +1,5 @@
-#ifndef __S21_MAP_MEMBER_FUNCTIONS__
-#define __S21_MAP_MEMBER_FUNCTIONS__
+#ifndef CPP2_S21_CONTAINERS_1_ASSOCIATIVE_S21_MAP_MEMBER_FUNCTIONS_H_
+#define CPP2_S21_CONTAINERS_1_ASSOCIATIVE_S21_MAP_MEMBER_FUNCTIONS_H_
 
 namespace s21
 {
@@ -12,7 +12,7 @@ namespace s21
     {
         for (auto it = s.begin(); it != s.end(); ++it)
         {
-            rbtree_.InsertNode(*it);
+            insert(*it);
         }
     }
 
@@ -21,7 +21,7 @@ namespace s21
     {
         for (auto it = items.begin(); it != items.end(); it++)
         {
-            rbtree_.InsertNode(value_type{it->first, it->second});
+            insert(value_type{it->first, it->second});
         }
     }
 

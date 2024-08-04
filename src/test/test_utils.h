@@ -1,3 +1,6 @@
+#ifndef CPP2_S21_CONTAINERS_1_TEST_TEST_UTILS_H_
+#define CPP2_S21_CONTAINERS_1_TEST_TEST_UTILS_H_
+
 #include <type_traits>
 #include <utility>
 #include <map>
@@ -59,11 +62,11 @@ namespace s21
     template <typename T, typename U>
     void AssertTreeEquality(const T &rbt1, U rbt2) // second is std::set<Node>
     {
-        ASSERT_EQ(rbt1.empty(), rbt2.empty());
-        ASSERT_EQ(rbt1.size(), rbt2.size());
-        auto first_iter = rbt1.cbegin();
+        ASSERT_EQ(rbt1.Empty(), rbt2.empty());
+        ASSERT_EQ(rbt1.Size(), rbt2.size());
+        auto first_iter = rbt1.cBegin();
         auto second_iter = rbt2.begin();
-        while (first_iter != rbt1.cend())
+        while (first_iter != rbt1.cEnd())
         {
             ASSERT_EQ(*first_iter, *((*second_iter).key));
             ASSERT_EQ(first_iter.GetNode().color, (*second_iter).color);
@@ -77,3 +80,5 @@ namespace s21
     }
 
 }
+
+#endif

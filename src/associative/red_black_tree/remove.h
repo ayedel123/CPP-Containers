@@ -1,5 +1,5 @@
-#ifndef __RED_BLACK_TREE_REMOVE__
-#define __RED_BLACK_TREE_REMOVE__
+#ifndef CPP2_S21_CONTAINERS_1_ASSOCIATIVE_RED_BLACK_TREE_REMOVE_H
+#define CPP2_S21_CONTAINERS_1_ASSOCIATIVE_RED_BLACK_TREE_REMOVE_H
 
 namespace s21
 {
@@ -61,34 +61,34 @@ namespace s21
         {
             DelCase1(tmp);
         }
-        Node<Key> *p = tmp->parent;
+        Node<Key> *parent = tmp->parent;
 
-        if (p->left == tmp)
+        if (parent->left == tmp)
         {
-            p->left = nullptr;
+            parent->left = nullptr;
         }
         else
         {
-            p->right = nullptr;
+            parent->right = nullptr;
         }
     }
     template <typename Key>
     void RBTree<Key>::HanldeIfChild(Node<Key> *tmp, Node<Key> *child)
     {
         child->parent = tmp->parent;
-        Node<Key> *p = tmp->parent;
+        Node<Key> *parent = tmp->parent;
 
         if (tmp->parent)
         {
-            if (tmp == p->left)
+            if (tmp == parent->left)
             {
-                // DeleteNode(p->left);
-                p->left = child;
+                // DeleteNode(parent->left);
+                parent->left = child;
             }
             else
             {
-                // DeleteNode(p->right);
-                p->right = child;
+                // DeleteNode(parent->right);
+                parent->right = child;
             }
         }
         else
@@ -128,22 +128,22 @@ namespace s21
     template <typename Key>
     void RBTree<Key>::DelCase2(Node<Key> *node)
     {
-        Node<Key> *s = Sibling(node);
-        Node<Key> *p = node->parent;
-        bool scol = s ? s->color : black_node;
+        Node<Key> *sibling = Sibling(node);
+        Node<Key> *parent = node->parent;
+        bool sibling_color = sibling ? sibling->color : black_node;
 
-        if (scol == red_node)
+        if (sibling_color == red_node)
         {
-            p->color = red_node;
-            s->color = black_node;
+            parent->color = red_node;
+            sibling->color = black_node;
 
-            if (node == p->left)
+            if (node == parent->left)
             {
-                RotateLeft(p);
+                RotateLeft(parent);
             }
             else
             {
-                RotateRight(p);
+                RotateRight(parent);
             }
         }
 
@@ -152,20 +152,20 @@ namespace s21
     template <typename Key>
     void RBTree<Key>::DelCase3(Node<Key> *node)
     {
-        Node<Key> *s = Sibling(node);
-        Node<Key> *p = node->parent;
+        Node<Key> *sibling = Sibling(node);
+        Node<Key> *parent = node->parent;
 
-        bool scol = s ? s->color : black_node;
-        bool lcol = s && s->left ? s->left->color : black_node;
-        bool rcol = s && s->right ? s->right->color : black_node;
+        bool sibling_color = sibling ? sibling->color : black_node;
+        bool lcolor = sibling && sibling->left ? sibling->left->color : black_node;
+        bool rcolor = sibling && sibling->right ? sibling->right->color : black_node;
 
-        if (p->color == black_node && scol == black_node && lcol == black_node && rcol == black_node)
+        if (parent->color == black_node && sibling_color == black_node && lcolor == black_node && rcolor == black_node)
         {
-            if (s)
+            if (sibling)
             {
-                s->color = red_node;
+                sibling->color = red_node;
             }
-            DelCase1(p);
+            DelCase1(parent);
         }
         else
         {
@@ -175,20 +175,20 @@ namespace s21
     template <typename Key>
     void RBTree<Key>::DelCase4(Node<Key> *node)
     {
-        Node<Key> *s = Sibling(node);
-        Node<Key> *p = node->parent;
+        Node<Key> *sibling = Sibling(node);
+        Node<Key> *parent = node->parent;
 
-        bool scol = s ? s->color : black_node;
-        bool lcol = s && s->left ? s->left->color : black_node;
-        bool rcol = s && s->right ? s->right->color : black_node;
+        bool sibling_color = sibling ? sibling->color : black_node;
+        bool lcolor = sibling && sibling->left ? sibling->left->color : black_node;
+        bool rcolor = sibling && sibling->right ? sibling->right->color : black_node;
 
-        if (p->color == red_node && scol == black_node && lcol == black_node && rcol == black_node)
+        if (parent->color == red_node && sibling_color == black_node && lcolor == black_node && rcolor == black_node)
         {
-            if (s)
+            if (sibling)
             {
-                s->color = red_node;
+                sibling->color = red_node;
             }
-            p->color = black_node;
+            parent->color = black_node;
         }
         else
         {
@@ -198,25 +198,25 @@ namespace s21
     template <typename Key>
     void RBTree<Key>::DelCase5(Node<Key> *node)
     {
-        Node<Key> *s = Sibling(node);
-        Node<Key> *p = node->parent;
+        Node<Key> *sibling = Sibling(node);
+        Node<Key> *parent = node->parent;
 
-        bool lcol = s->left ? s->left->color : black_node;
-        bool rcol = s->right ? s->right->color : black_node;
+        bool lcolor = sibling->left ? sibling->left->color : black_node;
+        bool rcolor = sibling->right ? sibling->right->color : black_node;
 
-        if (s->color == black_node)
+        if (sibling->color == black_node)
         {
-            if (node == p->left && rcol == black_node && lcol == red_node)
+            if (node == parent->left && rcolor == black_node && lcolor == red_node)
             {
-                s->color = red_node;
-                s->left->color = black_node;
-                RotateRight(s);
+                sibling->color = red_node;
+                sibling->left->color = black_node;
+                RotateRight(sibling);
             }
-            else if (node == p->right && lcol == black_node && rcol == red_node)
+            else if (node == parent->right && lcolor == black_node && rcolor == red_node)
             {
-                s->color = red_node;
-                s->right->color = black_node;
-                RotateLeft(s);
+                sibling->color = red_node;
+                sibling->right->color = black_node;
+                RotateLeft(sibling);
             }
         }
 
@@ -225,26 +225,26 @@ namespace s21
     template <typename Key>
     void RBTree<Key>::DelCase6(Node<Key> *node)
     {
-        Node<Key> *s = Sibling(node);
-        Node<Key> *p = node->parent;
-        s->color = p->color;
-        p->color = black_node;
+        Node<Key> *sibling = Sibling(node);
+        Node<Key> *parent = node->parent;
+        sibling->color = parent->color;
+        parent->color = black_node;
 
-        if (node == p->left)
+        if (node == parent->left)
         {
-            if (s->right)
+            if (sibling->right)
             {
-                s->right->color = black_node;
+                sibling->right->color = black_node;
             }
-            RotateLeft(p);
+            RotateLeft(parent);
         }
         else
         {
-            if (s->left)
+            if (sibling->left)
             {
-                s->left->color = black_node;
+                sibling->left->color = black_node;
             }
-            RotateRight(p);
+            RotateRight(parent);
         }
     }
 }

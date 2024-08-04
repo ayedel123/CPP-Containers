@@ -19,17 +19,16 @@ TEST_F(RBTreeTest, insert_case_0)
     AssertTreeEquality(rbtree1, set);
 }
 
-// TEST_F(RBTreeTest, insert_case_1)
-// {
-//     using namespace s21;
-//     RBTree<int> rbtree1 = RBTree<int>();
-//     std::set<Node<int>> set = std::set<Node<int>>();
-//     rbtree1.InsertNode(1);
-//     int *rbtree2_val = new int[2];
-//     rbtree2_val[0] = 1;
-//     set.insert(Node<int>{&(rbtree2_val[0]), nullptr, nullptr, nullptr});
-//     AssertTreeEquality(rbtree1, set);
-// }
+TEST_F(RBTreeTest, insert_case_1)
+{
+    using namespace s21;
+    RBTree<int> rbtree1 = RBTree<int>();
+    std::set<Node<int>> set = std::set<Node<int>>();
+    rbtree1.Insert(1);
+
+    set.insert(Node<int>{new int{1}, nullptr, nullptr, nullptr, black_node});
+    AssertTreeEquality(rbtree1, set);
+}
 
 // TEST_F(RBTreeTest, insert_case_2)
 // {

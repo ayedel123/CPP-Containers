@@ -1,22 +1,22 @@
-#ifndef __RED_BLACK_TREE_CAPACITY__
-#define __RED_BLACK_TREE_CAPACITY__
+#ifndef CPP2_S21_CONTAINERS_1_ASSOCIATIVE_RED_BLACK_TREE_CAPACITY_H_
+#define CPP2_S21_CONTAINERS_1_ASSOCIATIVE_RED_BLACK_TREE_CAPACITY_H_
 
 namespace s21
 {
     template <typename Key>
-    typename RBTree<Key>::size_type RBTree<Key>::size() const
+    typename RBTree<Key>::size_type RBTree<Key>::Size() const
     {
         return size_;
     }
 
     template <typename Key>
-    bool RBTree<Key>::empty() const
+    bool RBTree<Key>::Empty() const
     {
-        return (size() == 0) ? true : false;
+        return (Size() == 0) ? true : false;
     }
 
     template <typename Key>
-    typename RBTree<Key>::size_type RBTree<Key>::max_size() const
+    typename RBTree<Key>::size_type RBTree<Key>::MaxSize() const
     {
         return std::numeric_limits<difference_type>::max() /
                sizeof(Node<Key>);
