@@ -1,9 +1,20 @@
 #ifndef CPP2_S21_CONTAINERS_1_TEST_TEST_UTILS_H_
 #define CPP2_S21_CONTAINERS_1_TEST_TEST_UTILS_H_
 
+#include <gtest/gtest.h>
+
+#include <array>
+#include <list>
+#include <map>
+#include <queue>
+#include <set>
+#include <stack>
+#include <vector>
+
 #include <type_traits>
 #include <utility>
-#include <map>
+
+#include "../s21_containers.h"
 
 template <typename Iterator, typename = void>
 struct HasFirstAndSecond : std::false_type

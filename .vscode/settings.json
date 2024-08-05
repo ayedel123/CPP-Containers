@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.yml": "dockerfile",
+        "stack.h": "c"
+    }
+}

@@ -1,7 +1,7 @@
 #ifndef CPP2_S21_CONTAINERS_1_ASSOCIATIVE_S21_MAP_MODIFIERS_H_
 #define CPP2_S21_CONTAINERS_1_ASSOCIATIVE_S21_MAP_MODIFIERS_H_
 
-#include "s21_map.h"
+#include "map.h"
 
 namespace s21
 {

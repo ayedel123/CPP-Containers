@@ -1,9 +1,3 @@
-#include <gtest/gtest.h>
-
-#include <set>
-
-#include "../s21_containers.h"
-
 #include "test_utils.h"
 
 class SetTestCase : public ::testing::Test

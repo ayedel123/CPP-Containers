@@ -14,17 +14,21 @@ ifeq ($(UNAME), Darwin)
 TESTFLAGS=-lgtest -lgtest_main -lstdc++ -pthread -lm -g
 endif
 
+CONTAINERS_SOURCES =
+
 TEST_SOURCES = ./test/containers_test.cc \
 			 ./test/map_test.cc \
 			 ./test/set_test.cc \
 			 ./test/rbtree_test.cc \
-			 ./test/multiset_test.cc
+			 ./test/multiset_test.cc \
+			 ./test/vector_test.cc \
+			 ./test/stack_test.cc
 
 test: clean
-	$(GPP) $(CFLAGS)  $(TEST_SOURCES)  $(TESTFLAGS) -o test.out
+	$(GPP) $(CFLAGS) $(CONTAINERS_SOURCES) $(TEST_SOURCES)  $(TESTFLAGS) -o test.out
 
 man_test: clean
-	$(GPP) $(CFLAGS) ./manual_test/main.cc -o test.out
+	$(GPP) $(CFLAGS) $(CONTAINERS_SOURCES) ./manual_test/main.cc -o test.out
 
 run:
 	./test.out
