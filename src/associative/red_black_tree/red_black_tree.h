@@ -11,8 +11,8 @@ namespace s21
     enum NodeColors
     {
 
-        black_node,
-        red_node
+        black_node = false,
+        red_node = true
     };
 
     template <typename Key>
@@ -22,7 +22,7 @@ namespace s21
         Node<Key> *left = nullptr;
         Node<Key> *right = nullptr;
         Node<Key> *parent = nullptr;
-        bool color = black_node;
+        int color = black_node;
 
         ~Node()
         {
@@ -73,7 +73,6 @@ namespace s21
 
         RBTree(const RBTree &other);
         RBTree(RBTree<Key> &&other) noexcept;
-
 
         ~RBTree();
 
@@ -181,7 +180,7 @@ namespace s21
                             // Устанавливаем черный цвет для текста
                             std::cout << "\033[1;30m"; // ASCII-код для установки цвета текста в черный
                         }
-                        std::cout << node->key;  // Вывод значения узла
+                        std::cout << *(node->key);  // Вывод значения узла
                         std::cout << "\033[0m "; // Сброс цвета обратно в стандартный
                         if (node->left)
                         {

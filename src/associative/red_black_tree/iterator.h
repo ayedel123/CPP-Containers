@@ -140,8 +140,6 @@ namespace s21
         {
             return *(node_->key);
         }
-
-        const pointer operator->() const { return node_->key; }
     };
 
     template <typename Key>

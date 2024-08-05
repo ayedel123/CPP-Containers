@@ -23,11 +23,10 @@ namespace s21
             {
                 tmp = HandleTwoChildren(tmp);
             }
-            Node<Key> *child = (!tmp->left) ? tmp->left : tmp->right;
+            Node<Key> *child = (tmp->left) ? tmp->left : tmp->right;
             if (!child)
             {
                 HandleChildFree(tmp);
-                // delete tmp;
             }
 
             else
@@ -36,7 +35,6 @@ namespace s21
             }
         }
         delete tmp;
-
     }
 
     template <typename Key>
@@ -47,7 +45,6 @@ namespace s21
         {
             removed = removed->right;
         }
-        // f***k const
 
         delete tmp->key;
         tmp->key = new Key{*(removed->key)};
@@ -82,12 +79,10 @@ namespace s21
         {
             if (tmp == parent->left)
             {
-                // DeleteNode(parent->left);
                 parent->left = child;
             }
             else
             {
-                // DeleteNode(parent->right);
                 parent->right = child;
             }
         }

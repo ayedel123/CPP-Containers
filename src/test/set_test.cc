@@ -148,3 +148,30 @@ TEST_F(SetTestCase, case_14)
     AssertContainerEquality(s21_set1, std_set1);
     AssertContainerEquality(s21_set2, std_set2);
 }
+
+TEST_F(SetTestCase, case_15)
+{
+    s21::set<int> s21_set = {5, 4, 15, 12, 9, 17, 3, 1, 7, 2, 6, 8};
+    s21_set.erase(s21_set.find(4));
+    std::set<int> std_set = {5, 4, 15, 12, 9, 17, 3, 1, 7, 2, 6, 8};
+    std_set.erase(std_set.find(4));
+    AssertContainerEquality(s21_set, std_set);
+}
+
+TEST_F(SetTestCase, case_16)
+{
+    s21::set<int> s21_set = {5, 4, 15, 12, 9, 17, 3, 1, 7, 2, 6, 8};
+    s21_set.erase(s21_set.find(9));
+    std::set<int> std_set = {5, 4, 15, 12, 9, 17, 3, 1, 7, 2, 6, 8};
+    std_set.erase(std_set.find(9));
+    AssertContainerEquality(s21_set, std_set);
+}
+
+TEST_F(SetTestCase, case_17)
+{
+    s21::set<int> s21_set = {5, 6};
+    s21_set.erase(s21_set.find(5));
+    std::set<int> std_set = {5, 6};
+    std_set.erase(std_set.find(5));
+    AssertContainerEquality(s21_set, std_set);
+}
