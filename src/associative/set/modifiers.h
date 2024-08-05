@@ -1,31 +1,31 @@
-#ifndef CPP2_S21_CONTAINERS_1_ASSOCIATIVE_S21_MULTISET_MODIFIERS_H_
-#define CPP2_S21_CONTAINERS_1_ASSOCIATIVE_S21_MULTISET_MODIFIERS_H_
+#ifndef CPP2_S21_CONTAINERS_1_ASSOCIATIVE_S21_SET_MODIFIERS_H_
+#define CPP2_S21_CONTAINERS_1_ASSOCIATIVE_S21_SET_MODIFIERS_H_
 
-#include "s21_multiset.h"
+#include "set.h"
 
 namespace s21
 {
 
     template <typename Key>
-    void multiset<Key>::clear()
+    void set<Key>::clear()
     {
         rbtree_.Clear();
     }
 
     template <typename Key>
-    std::pair<typename multiset<Key>::iterator, bool> multiset<Key>::insert(const Key &value)
+    std::pair<typename set<Key>::iterator, bool> set<Key>::insert(const Key &value)
     {
         return rbtree_.Insert(value);
     }
 
     template <typename Key>
-    void multiset<Key>::erase(typename multiset<Key>::iterator pos)
+    void set<Key>::erase(typename set<Key>::iterator pos)
     {
         rbtree_.Remove(*pos);
     }
 
     template <typename Key>
-    void multiset<Key>::swap(multiset &other)
+    void set<Key>::swap(set &other)
     {
         if (this != &other)
         {
@@ -34,13 +34,13 @@ namespace s21
     }
 
     template <typename Key>
-    void multiset<Key>::merge(multiset &other)
+    void set<Key>::merge(set &other)
     {
         for (auto it = other.begin(); it != other.end(); ++it)
         {
-            insert(*it);
+            if ((insert(*it)).second)
+                other.erase(it);
         }
-        other.clear();
     }
 
 }

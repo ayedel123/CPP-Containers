@@ -1,7 +1,7 @@
 #ifndef CPP2_S21_CONTAINERS_1_ASSOCIATIVE_S21_MULTISET_CAPACITY_H_
 #define CPP2_S21_CONTAINERS_1_ASSOCIATIVE_S21_MULTISET_CAPACITY_H_
 
-#include "s21_multiset.h"
+#include "multiset.h"
 
 namespace s21
 {

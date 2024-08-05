@@ -1,9 +1,3 @@
-#include <gtest/gtest.h>
-
-#include <map>
-
-#include "../s21_containers.h"
-
 #include "test_utils.h"
 
 class MapTestCase : public ::testing::Test
