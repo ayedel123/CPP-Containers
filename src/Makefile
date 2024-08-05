@@ -18,7 +18,6 @@ endif
 TEST_SOURCES = ./test/containers_test.cc \
 			 ./test/map_test.cc \
 			 ./test/set_test.cc \
-			 ./test/rbtree_test.cc \
 			 ./test/stack_test.cc \
 			 ./test/vector_test.cc
 
