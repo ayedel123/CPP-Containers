@@ -3,9 +3,14 @@
 
 #include <gtest/gtest.h>
 
-
 #include <map>
 #include <set>
+
+#include <array>
+#include <list>
+#include <queue>
+#include <stack>
+#include <vector>
 
 #include <type_traits>
 #include <utility>
