@@ -36,10 +36,15 @@ namespace s21
     template <typename Key>
     void set<Key>::merge(set &other)
     {
+        auto tmp = other.begin();
         for (auto it = other.begin(); it != other.end(); ++it)
         {
+            tmp = it;
+            ++tmp;
             if ((insert(*it)).second)
                 other.erase(it);
+            --tmp;
+            it = tmp;
         }
     }
 

@@ -56,10 +56,15 @@ namespace s21
     template <typename Key, typename T>
     void map<Key, T>::merge(map &other)
     {
+        auto tmp = other.begin();
         for (auto it = other.begin(); it != other.end(); ++it)
         {
+            tmp = it;
+            ++tmp;
             if ((insert(*it)).second)
                 other.erase(it);
+            --tmp;
+            it = tmp;
         }
     }
 
