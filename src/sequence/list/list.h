@@ -13,7 +13,7 @@ class list {
   using const_reference = const T &;
   using size_type = size_t;
 
-private:
+ private:
   struct Node {
     T value_;
     Node *next_;
@@ -28,7 +28,7 @@ private:
   Node *end_;
   size_type size_;
 
-public:
+ public:
   // List Functions //
   list() : head_(nullptr), tail_(nullptr), end_(nullptr), size_(0) {}
 

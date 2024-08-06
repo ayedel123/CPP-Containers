@@ -4,29 +4,25 @@
 #include "array.h"
 
 class reference;
-namespace s21
-{
+namespace s21 {
 
-    // capacity
+// capacity
 
-    template <class T, std::size_t N>
-    bool array<T, N>::empty() const
-    {
-        return !size_;
-    }
-
-    template <class T, std::size_t N>
-    typename array<T, N>::size_type array<T, N>::size() const
-    {
-        return size_;
-    }
-
-    template <typename T, std::size_t N>
-    typename array<T, N>::size_type array<T, N>::max_size() const
-    {
-        return std::numeric_limits<size_type>::max() / sizeof(value_type);
-    }
-
+template <class T, std::size_t N>
+bool array<T, N>::empty() const {
+  return !size_;
 }
+
+template <class T, std::size_t N>
+typename array<T, N>::size_type array<T, N>::size() const {
+  return size_;
+}
+
+template <typename T, std::size_t N>
+typename array<T, N>::size_type array<T, N>::max_size() const {
+  return std::numeric_limits<size_type>::max() / sizeof(value_type);
+}
+
+}  // namespace s21
 
 #endif

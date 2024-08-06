@@ -1,7 +1,6 @@
 #include "test_utils.h"
 
-TEST(default_constructor_suite, int_true_test)
-{
+TEST(default_constructor_suite, int_true_test) {
   s21::vector<int> s21_a;
   std::vector<int> std_a;
 
@@ -10,8 +9,7 @@ TEST(default_constructor_suite, int_true_test)
   EXPECT_TRUE(s21_a.capacity() == std_a.capacity());
 }
 
-TEST(default_constructor_suite, double_true_test)
-{
+TEST(default_constructor_suite, double_true_test) {
   s21::vector<double> s21_a;
   std::vector<double> std_a;
 
@@ -20,8 +18,7 @@ TEST(default_constructor_suite, double_true_test)
   EXPECT_TRUE(s21_a.capacity() == std_a.capacity());
 }
 
-TEST(default_constructor_suite, float_true_test)
-{
+TEST(default_constructor_suite, float_true_test) {
   s21::vector<float> s21_a;
   std::vector<float> std_a;
 
@@ -30,10 +27,8 @@ TEST(default_constructor_suite, float_true_test)
   EXPECT_TRUE(s21_a.capacity() == std_a.capacity());
 }
 
-TEST(default_constructor_suite, struct_true_test)
-{
-  struct test_struct
-  {
+TEST(default_constructor_suite, struct_true_test) {
+  struct test_struct {
     int a;
     double b;
     float c;
@@ -47,8 +42,7 @@ TEST(default_constructor_suite, struct_true_test)
   EXPECT_TRUE(s21_a.capacity() == std_a.capacity());
 }
 
-TEST(parameterized_constructor_suite, int_true_test)
-{
+TEST(parameterized_constructor_suite, int_true_test) {
   s21::vector<int> s21_a(5);
   std::vector<int> std_a(5);
 
@@ -57,8 +51,7 @@ TEST(parameterized_constructor_suite, int_true_test)
   EXPECT_TRUE(s21_a.capacity() == std_a.capacity());
 }
 
-TEST(parameterized_constructor_suite, double_true_test)
-{
+TEST(parameterized_constructor_suite, double_true_test) {
   s21::vector<double> s21_a(5);
   std::vector<double> std_a(5);
 
@@ -67,8 +60,7 @@ TEST(parameterized_constructor_suite, double_true_test)
   EXPECT_TRUE(s21_a.capacity() == std_a.capacity());
 }
 
-TEST(parameterized_constructor_suite, float_true_test)
-{
+TEST(parameterized_constructor_suite, float_true_test) {
   s21::vector<float> s21_a(5);
   std::vector<float> std_a(5);
 
@@ -77,10 +69,8 @@ TEST(parameterized_constructor_suite, float_true_test)
   EXPECT_TRUE(s21_a.capacity() == std_a.capacity());
 }
 
-TEST(parameterized_constructor_suite, struct_true_test)
-{
-  struct test_struct
-  {
+TEST(parameterized_constructor_suite, struct_true_test) {
+  struct test_struct {
     int a;
     double b;
     float c;
@@ -94,14 +84,12 @@ TEST(parameterized_constructor_suite, struct_true_test)
   EXPECT_TRUE(s21_a.capacity() == std_a.capacity());
 }
 
-TEST(copy_constructor_suite, int_true_test)
-{
+TEST(copy_constructor_suite, int_true_test) {
   s21::vector<int> s21_b(5);
   std::vector<int> std_b(5);
 
   int *std_b_data = std_b.data();
-  for (long unsigned int i = 0; i < std_b.size(); ++i)
-    std_b_data[i] = i + 10;
+  for (long unsigned int i = 0; i < std_b.size(); ++i) std_b_data[i] = i + 10;
   std::vector<int> std_a(std_b);
 
   s21_b.filling();
@@ -117,14 +105,12 @@ TEST(copy_constructor_suite, int_true_test)
   std::vector<int>::iterator std_itr = std_a.begin();
   s21::vector<int>::iterator s21_itr = s21_a.begin();
   for (; s21_itr != s21_a.end() && std_itr != std_a.end();
-       ++s21_itr, ++std_itr)
-  {
+       ++s21_itr, ++std_itr) {
     EXPECT_TRUE(*s21_itr == *std_itr);
   }
 }
 
-TEST(copy_constructor_suite, double_true_test)
-{
+TEST(copy_constructor_suite, double_true_test) {
   s21::vector<double> s21_b(5);
   s21::vector<double> s21_a(s21_b);
   std::vector<double> std_b(5);
@@ -138,8 +124,7 @@ TEST(copy_constructor_suite, double_true_test)
   EXPECT_TRUE(s21_b.capacity() == std_b.capacity());
 }
 
-TEST(copy_constructor_suite, float_true_test)
-{
+TEST(copy_constructor_suite, float_true_test) {
   s21::vector<float> s21_b(5);
   s21::vector<float> s21_a(s21_b);
   std::vector<float> std_b(5);
@@ -153,10 +138,8 @@ TEST(copy_constructor_suite, float_true_test)
   EXPECT_TRUE(s21_b.capacity() == std_b.capacity());
 }
 
-TEST(copy_constructor_suite, struct_true_test)
-{
-  struct test_struct
-  {
+TEST(copy_constructor_suite, struct_true_test) {
+  struct test_struct {
     int a;
     double b;
     float c;
@@ -175,8 +158,7 @@ TEST(copy_constructor_suite, struct_true_test)
   EXPECT_TRUE(s21_b.capacity() == std_b.capacity());
 }
 
-TEST(move_constructor_suite, int_true_test)
-{
+TEST(move_constructor_suite, int_true_test) {
   s21::vector<int> s21_b(5);
   s21::vector<int> s21_a(std::move(s21_b));
 
@@ -188,8 +170,7 @@ TEST(move_constructor_suite, int_true_test)
   EXPECT_TRUE(s21_a.capacity() == std_a.capacity());
 }
 
-TEST(initializer_list_suite, filled_true_test)
-{
+TEST(initializer_list_suite, filled_true_test) {
   s21::vector<int> s21_b = {1, 2, 3, 4, 5};
   s21::vector<int> s21_a(std::move(s21_b));
 
@@ -204,14 +185,12 @@ TEST(initializer_list_suite, filled_true_test)
   s21::vector<int>::iterator s21_itr = s21_a.begin();
 
   for (; s21_itr != s21_a.end() && std_itr != std_a.end();
-       ++s21_itr, ++std_itr)
-  {
+       ++s21_itr, ++std_itr) {
     EXPECT_TRUE(*s21_itr == *std_itr);
   }
 }
 
-TEST(move_operator_constructor_suite, float_true_test)
-{
+TEST(move_operator_constructor_suite, float_true_test) {
   s21::vector<float> s21_a({1, 2, 3});
   s21::vector<float> s21_b;
   s21_b = std::move(s21_a);
@@ -224,10 +203,8 @@ TEST(move_operator_constructor_suite, float_true_test)
   EXPECT_TRUE(s21_b.size() == std_b.size());
 }
 
-TEST(initializer_list_suite_struct, filled_true_test)
-{
-  struct test_struct
-  {
+TEST(initializer_list_suite_struct, filled_true_test) {
+  struct test_struct {
     int a = 0;
     double b = 0;
     float c = 0;
@@ -248,18 +225,15 @@ TEST(initializer_list_suite_struct, filled_true_test)
   s21::vector<test_struct>::iterator s21_itr = s21_a.begin();
 
   for (; s21_itr != s21_a.end() && std_itr != std_a.end();
-       ++s21_itr, ++std_itr)
-  {
+       ++s21_itr, ++std_itr) {
     EXPECT_TRUE((*s21_itr).a == (*std_itr).a);
     EXPECT_TRUE((*s21_itr).b == (*std_itr).b);
     EXPECT_TRUE((*s21_itr).c == (*std_itr).c);
   }
 }
 
-TEST(assignment_operator, int_true_test)
-{
-  struct test_struct
-  {
+TEST(assignment_operator, int_true_test) {
+  struct test_struct {
     int a = 0;
     double b = 0;
     float c = 0;
@@ -282,16 +256,14 @@ TEST(assignment_operator, int_true_test)
   s21::vector<test_struct>::iterator s21_itr = s21_a.begin();
 
   for (; s21_itr != s21_a.end() && std_itr != std_a.end();
-       ++s21_itr, ++std_itr)
-  {
+       ++s21_itr, ++std_itr) {
     EXPECT_TRUE((*s21_itr).a == (*std_itr).a);
     EXPECT_TRUE((*s21_itr).b == (*std_itr).b);
     EXPECT_TRUE((*s21_itr).c == (*std_itr).c);
   }
 }
 
-TEST(move_constructor_suite, double_true_test)
-{
+TEST(move_constructor_suite, double_true_test) {
   s21::vector<double> s21_b(5);
   s21::vector<double> s21_a(std::move(s21_b));
   std::vector<double> std_b(5);
@@ -302,8 +274,7 @@ TEST(move_constructor_suite, double_true_test)
   EXPECT_TRUE(s21_a.capacity() == std_a.capacity());
 }
 
-TEST(move_constructor_suite, float_true_test)
-{
+TEST(move_constructor_suite, float_true_test) {
   s21::vector<float> s21_b(5);
   s21::vector<float> s21_a(std::move(s21_b));
   std::vector<float> std_b(5);
@@ -314,10 +285,8 @@ TEST(move_constructor_suite, float_true_test)
   EXPECT_TRUE(s21_a.capacity() == std_a.capacity());
 }
 
-TEST(move_constructor_suite, struct_true_test)
-{
-  struct test_struct
-  {
+TEST(move_constructor_suite, struct_true_test) {
+  struct test_struct {
     int a;
     double b;
     float c;
@@ -333,8 +302,7 @@ TEST(move_constructor_suite, struct_true_test)
   EXPECT_TRUE(s21_a.capacity() == std_a.capacity());
 }
 
-TEST(shrink_to_fit_suite, int_true_test)
-{
+TEST(shrink_to_fit_suite, int_true_test) {
   s21::vector<int> s21_a;
   s21_a.push_back(1);
   s21_a.push_back(2);
@@ -361,8 +329,7 @@ TEST(shrink_to_fit_suite, int_true_test)
   s21::vector<int>::iterator s21_itr = s21_a.begin();
 
   for (; s21_itr != s21_a.end() && std_itr != std_a.end();
-       ++s21_itr, ++std_itr)
-  {
+       ++s21_itr, ++std_itr) {
     EXPECT_TRUE(*s21_itr == *std_itr);
   }
 }
@@ -403,8 +370,7 @@ TEST(shrink_to_fit_suite, int_true_test)
 // }
 
 //  BLOCK: ITERATORS
-TEST(iterator_begin, true_test)
-{
+TEST(iterator_begin, true_test) {
   s21::vector<int> s21_a;
   std::vector<int> std_a;
   auto s21_itr = s21_a.begin();
@@ -419,8 +385,7 @@ TEST(iterator_begin, true_test)
   EXPECT_TRUE(*s21_itr == *std_itr);
 }
 
-TEST(iterator_begin, elem_after_pop_test)
-{
+TEST(iterator_begin, elem_after_pop_test) {
   s21::vector<int> s21_a;
   std::vector<int> std_a;
   auto s21_itr = s21_a.begin();
@@ -438,16 +403,14 @@ TEST(iterator_begin, elem_after_pop_test)
 }
 
 // BLOCK: CAPACITY
-TEST(empty_suite, true_test)
-{
+TEST(empty_suite, true_test) {
   s21::vector<int> s21_a;
   std::vector<int> std_a;
 
   EXPECT_TRUE(s21_a.empty() == std_a.empty());
 }
 
-TEST(empty_suite, cleaned_test)
-{
+TEST(empty_suite, cleaned_test) {
   s21::vector<int> s21_a(5);
   std::vector<int> std_a(5);
 
@@ -469,24 +432,21 @@ TEST(empty_suite, cleaned_test)
 //   EXPECT_TRUE(s21_a.empty() == std_a.empty());
 // }
 
-TEST(size_suite, empty_test)
-{
+TEST(size_suite, empty_test) {
   s21::vector<int> s21_a;
   std::vector<int> std_a;
 
   EXPECT_TRUE(s21_a.size() == std_a.size());
 }
 
-TEST(size_suite, parameterized_test)
-{
+TEST(size_suite, parameterized_test) {
   s21::vector<int> s21_a(5);
   std::vector<int> std_a(5);
 
   EXPECT_TRUE(s21_a.size() == std_a.size());
 }
 
-TEST(size_suite, push_test)
-{
+TEST(size_suite, push_test) {
   s21::vector<int> s21_a(5);
   std::vector<int> std_a(5);
 
@@ -496,8 +456,7 @@ TEST(size_suite, push_test)
   EXPECT_TRUE(s21_a.size() == std_a.size());
 }
 
-TEST(size_suite, pop_test)
-{
+TEST(size_suite, pop_test) {
   s21::vector<int> s21_a(5);
   std::vector<int> std_a(5);
 
@@ -507,24 +466,21 @@ TEST(size_suite, pop_test)
   EXPECT_TRUE(s21_a.size() == std_a.size());
 }
 
-TEST(capacity_suite, empty_test)
-{
+TEST(capacity_suite, empty_test) {
   s21::vector<int> s21_a;
   std::vector<int> std_a;
 
   EXPECT_TRUE(s21_a.capacity() == std_a.capacity());
 }
 
-TEST(capacity_suite, parameterized_test)
-{
+TEST(capacity_suite, parameterized_test) {
   s21::vector<int> s21_a(5);
   std::vector<int> std_a(5);
 
   EXPECT_TRUE(s21_a.capacity() == std_a.capacity());
 }
 
-TEST(capacity_suite, push_test)
-{
+TEST(capacity_suite, push_test) {
   s21::vector<int> s21_a(5);
   std::vector<int> std_a(5);
 
@@ -536,8 +492,7 @@ TEST(capacity_suite, push_test)
   EXPECT_TRUE(s21_a.capacity() == std_a.capacity());
 }
 
-TEST(capacity_suite, push_full_test)
-{
+TEST(capacity_suite, push_full_test) {
   s21::vector<int> s21_a(5);
   std::vector<int> std_a(5);
 
@@ -547,8 +502,7 @@ TEST(capacity_suite, push_full_test)
   EXPECT_TRUE(s21_a.capacity() == std_a.capacity());
 }
 
-TEST(capacity_suite, pop_test)
-{
+TEST(capacity_suite, pop_test) {
   s21::vector<int> s21_a(5);
   std::vector<int> std_a(5);
 
@@ -558,8 +512,7 @@ TEST(capacity_suite, pop_test)
   EXPECT_TRUE(s21_a.capacity() == std_a.capacity());
 }
 
-TEST(front_suite, swap_test)
-{
+TEST(front_suite, swap_test) {
   s21::vector<int> s21_a({1, 2, 3, 4, 5});
   s21::vector<int> s21_b({6});
   std::vector<int> std_a({1, 2, 3, 4, 5});
@@ -572,8 +525,7 @@ TEST(front_suite, swap_test)
   EXPECT_TRUE(s21_b.front() == std_b.front());
 }
 
-TEST(test_reserve, true_test)
-{
+TEST(test_reserve, true_test) {
   s21::vector<int> v = {1, 2, 3};
   v.reserve(10);
   std::vector<int> std_v = {1, 2, 3};
@@ -588,8 +540,7 @@ TEST(test_reserve, true_test)
   EXPECT_TRUE(f.capacity() == std_f.capacity());
 }
 
-TEST(test_back, true_test)
-{
+TEST(test_back, true_test) {
   s21::vector<int> v = {1, 2, 3};
   std::vector<int> std_v = {1, 2, 3};
 
@@ -600,21 +551,18 @@ TEST(test_back, true_test)
   EXPECT_TRUE(nums.back() == std_nums.back());
 }
 
-TEST(data_test, true_test)
-{
+TEST(data_test, true_test) {
   s21::vector<int> c = {1, 2, 3};
   EXPECT_TRUE(c[0] == *c.begin());
 }
 
-TEST(vector_test, access_in_range)
-{
+TEST(vector_test, access_in_range) {
   s21::vector<int> v{1, 2, 3};
   std::vector<int> std_v{1, 2, 3};
   EXPECT_EQ(v.at(0), std_v.at(0));
 }
 
-TEST(VectorTest, TestInsert)
-{
+TEST(VectorTest, TestInsert) {
   s21::vector<int> vec;
   vec.push_back(1);
   vec.push_back(2);

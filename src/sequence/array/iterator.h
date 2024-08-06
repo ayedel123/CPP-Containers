@@ -4,34 +4,29 @@
 #include "array.h"
 
 class reference;
-namespace s21
-{
+namespace s21 {
 
-    // iterators
-    template <class T, std::size_t N>
-    typename s21::array<T, N>::iterator array<T, N>::begin() const
-    {
-        return Iterator(arr_);
-    }
-
-    template <class T, std::size_t N>
-    typename s21::array<T, N>::iterator array<T, N>::end() const
-    {
-        return Iterator(arr_ + size_);
-    }
-
-    template <class T, std::size_t N>
-    typename s21::array<T, N>::const_iterator array<T, N>::cbegin() const
-    {
-        return ConstIterator(arr_ + size_);
-    }
-
-    template <class T, std::size_t N>
-    typename s21::array<T, N>::const_iterator array<T, N>::cend() const
-    {
-        return ConstIterator(arr_ + size_);
-    }
-
+// iterators
+template <class T, std::size_t N>
+typename s21::array<T, N>::iterator array<T, N>::begin() const {
+  return Iterator(arr_);
 }
+
+template <class T, std::size_t N>
+typename s21::array<T, N>::iterator array<T, N>::end() const {
+  return Iterator(arr_ + size_);
+}
+
+template <class T, std::size_t N>
+typename s21::array<T, N>::const_iterator array<T, N>::cbegin() const {
+  return ConstIterator(arr_ + size_);
+}
+
+template <class T, std::size_t N>
+typename s21::array<T, N>::const_iterator array<T, N>::cend() const {
+  return ConstIterator(arr_ + size_);
+}
+
+}  // namespace s21
 
 #endif

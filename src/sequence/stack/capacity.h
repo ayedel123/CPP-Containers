@@ -3,22 +3,19 @@
 
 #include "stack.h"
 
-namespace s21
-{
+namespace s21 {
 
-    ////Capacity
-    template <class T>
-    bool s21::stack<T>::empty()
-    {
-        return s21::vector<T>::empty();
-    }
+////Capacity
+template <class T>
+bool s21::stack<T>::empty() {
+  return s21::vector<T>::empty();
+}
 
-    template <class T>
-    size_t s21::stack<T>::size()
-    {
-        return s21::vector<T>::size();
-    }
+template <class T>
+size_t s21::stack<T>::size() {
+  return s21::vector<T>::size();
+}
 
-} // namespace s21
+}  // namespace s21
 
 #endif

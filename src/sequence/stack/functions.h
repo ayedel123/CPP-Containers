@@ -3,22 +3,19 @@
 
 #include "stack.h"
 
-namespace s21
-{
+namespace s21 {
 
-    //// Modifiers
-    template <class T>
-    void s21::stack<T>::push(const_reference value)
-    {
-        s21::vector<T>::push_back(value);
-    }
+//// Modifiers
+template <class T>
+void s21::stack<T>::push(const_reference value) {
+  s21::vector<T>::push_back(value);
+}
 
-    template <class T>
-    void s21::stack<T>::pop()
-    {
-        s21::vector<T>::pop_back();
-    }
+template <class T>
+void s21::stack<T>::pop() {
+  s21::vector<T>::pop_back();
+}
 
-} // namespace s21
+}  // namespace s21
 
 #endif

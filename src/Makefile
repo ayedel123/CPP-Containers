@@ -39,6 +39,19 @@ gcov_report: test
 man_test: clean
 	$(GPP) $(CFLAGS) $(CONTAINERS_SOURCES) ./manual_test/main.cc -o test.out
 
+style_check:
+	@cp ../materials/linters/.clang-format .clang-format
+	@find .. -type f -name "*.cc" -exec clang-format -n -style=Google {} \;
+	@find .. -type f -name "*.h" -exec clang-format -n -style=Google {} \;
+	@rm .clang-format
+	
+clang: style_check
+	@cp ../materials/linters/.clang-format .clang-format
+	@find .. -type f -name "*.cc" -exec clang-format -i -style=Google {} \;
+	@find .. -type f -name "*.h" -exec clang-format -i -style=Google {} \;
+	@rm .clang-format
+
+
 run:
 	./test.out
 

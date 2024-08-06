@@ -4,13 +4,13 @@
 #include "stack.h"
 
 namespace s21 {
-    
+
 //// Element access
-template<class T>
+template <class T>
 typename s21::stack<T>::const_reference s21::stack<T>::top() const {
-    return s21::vector < T > ::back();
+  return s21::vector<T>::back();
 }
 
-} //namespace s21
+}  // namespace s21
 
 #endif

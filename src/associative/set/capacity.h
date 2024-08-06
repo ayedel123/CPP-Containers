@@ -3,26 +3,22 @@
 
 #include "set.h"
 
-namespace s21
-{
-    template <typename Key>
-    typename set<Key>::size_type set<Key>::size() const
-    {
-        return rbtree_.Size();
-    }
-
-    template <typename Key>
-    typename set<Key>::size_type set<Key>::max_size() const
-    {
-        return rbtree_.MaxSize();
-    }
-
-    template <typename Key>
-    bool set<Key>::empty() const
-    {
-        return rbtree_.Empty();
-    }
-
+namespace s21 {
+template <typename Key>
+typename set<Key>::size_type set<Key>::size() const {
+  return rbtree_.Size();
 }
+
+template <typename Key>
+typename set<Key>::size_type set<Key>::max_size() const {
+  return rbtree_.MaxSize();
+}
+
+template <typename Key>
+bool set<Key>::empty() const {
+  return rbtree_.Empty();
+}
+
+}  // namespace s21
 
 #endif
