@@ -24,6 +24,7 @@ TEST_SOURCES = ./test/containers_test.cc \
 			 ./test/queue_test.cc
 
 
+all: test
 
 test: clean
 	$(GPP) $(CFLAGS) $(TEST_SOURCES)  $(TESTFLAGS) -o test.out
@@ -44,7 +45,7 @@ style_check:
 	@find .. -type f -name "*.cc" -exec clang-format -n -style=Google {} \;
 	@find .. -type f -name "*.h" -exec clang-format -n -style=Google {} \;
 	@rm .clang-format
-	
+
 clang: style_check
 	@cp ../materials/linters/.clang-format .clang-format
 	@find .. -type f -name "*.cc" -exec clang-format -i -style=Google {} \;
