@@ -19,7 +19,9 @@ TEST_SOURCES = ./test/containers_test.cc \
 			 ./test/map_test.cc \
 			 ./test/set_test.cc \
 			 ./test/stack_test.cc \
-			 ./test/vector_test.cc
+			 ./test/vector_test.cc \
+			 ./test/list_test.cc \
+			 ./test/queue_test.cc
 
 
 

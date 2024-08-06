@@ -10,5 +10,7 @@
 #include "./sequence/array/array.h"
 #include "./sequence/stack/stack.h"
 #include "./sequence/vector/vector.h"
+#include "./sequence/list/list.h"
+#include "./sequence/queue/queue.h"
 
 #endif

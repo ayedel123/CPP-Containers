@@ -5,6 +5,8 @@ Implementation of the s21_containers.h. library.
 The russian version of the task can be found in the repository.
 
 
+💡 [Tap here](https://new.oprosso.net/p/4cb31ec3f47a4596bc758ea1861fb624) **to leave your feedback on the project**. It's anonymous and will help our team make your educational experience better. We recommend completing the survey immediately after the project.
+
 ## Contents
 
 1. [Chapter I](#chapter-i) \
@@ -127,8 +129,8 @@ You need to complete the classes with the appropriate methods, according to the 
 | Modifiers      | Definition                                      | Containers |
 |----------------|-------------------------------------------------| -------------------------------------------|
 | `iterator insert_many(const_iterator pos, Args&&... args)`          | Inserts new elements into the container directly before `pos`.  | List, Vector. |
-| `void insert_many_back(Args&&... args)`          | Appends new elements to the end of the container.  | List, Vector, Queue. |
-| `void insert_many_front(Args&&... args)`          | Appends new elements to the top of the container.  | List, Stack. |
+| `void insert_many_back(Args&&... args)`          | Appends new elements to the end of the container.  | List, Vector, Queue, Stack. |
+| `void insert_many_front(Args&&... args)`          | Appends new elements to the top of the container.  | List. |
 | `vector<std::pair<iterator,bool>> insert_many(Args&&... args)`          | Inserts new elements into the container.  | Map, Set, Multiset. |
 
 Note: the arguments are the already created elements of the appropriate container that should be inserted into this container.
@@ -136,5 +138,3 @@ Note: the arguments are the already created elements of the appropriate containe
 *Tip 1*: Notice that each of these methods uses an Args&&... args - Parameter pack construct. This construct allows a variable number of parameters to be passed to a function or method. So, when calling a method defined as `iterator insert_many(const_iterator pos, Args&&... args)`, you can write either `insert_many(pos, arg1, arg2)` or `insert_many(pos, arg1, arg2, arg3)`.
 
 *Tip 2*: Remember to test methods for different cases, including boundary ones.
-
-💡 [Tap here](https://forms.yandex.ru/cloud/64181a7dc09c02252de7a4f3/) **to leave your feedback on the project**. Product Team really tries to make your educational experience better.

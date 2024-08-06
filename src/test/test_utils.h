@@ -11,6 +11,8 @@
 #include <queue>
 #include <stack>
 #include <vector>
+#include <queue>
+#include <list>
 
 #include <type_traits>
 #include <utility>
