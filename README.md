@@ -1,1 +1,2 @@
 # CPP-Containers
+This library (s21_containers) implements fundamental standard C++ container classes, including list, map, queue, set, stack, and vector. Each container provides a comprehensive set of standard methods and attributes for efficient element management, capacity checking, and iteration. Notably, the map, set, and multiset are implemented using red-black trees, ensuring efficient operations and maintaining balance for optimal performance.
